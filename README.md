@@ -1,5 +1,5 @@
 # Local Laplacian filters
-Implementation of the Local Laplacian filters image processing algorithm in C# using UMapx.NET Framework.
+Implementation of the local Laplacian filters image processing algorithm in C# using UMapx.NET Framework.
 
 ### Before
 ![Before](https://github.com/asiryan/Local-Laplacian-filters/blob/master/examples/before.jpg)

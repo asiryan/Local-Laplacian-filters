@@ -1,0 +1,14 @@
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Local Laplacian filters.exe.config
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Local Laplacian filters.exe
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\Local Laplacian filters.pdb
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\UMapx.pdb
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\bin\Debug\UMapx.xml
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\Local Laplacian filters.exe
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\Local Laplacian filters.pdb
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form2.resources
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form3.resources
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.Form4.resources
+C:\Users\User\Desktop\Local Laplacian filters\WindowsFormsApplication1\WindowsFormsApplication1\obj\x86\Debug\WindowsFormsApplication1.csprojResolveAssemblyReference.cache

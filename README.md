@@ -2,9 +2,9 @@
 Implementation of the local Laplacian filters image processing algorithm in C# using UMapx.NET Framework.
 
 ### Before
-![Before](https://github.com/asiryan/Local-Laplacian-filters/blob/master/examples/before.jpg)
+[Before](https://github.com/asiryan/Local-Laplacian-filters/blob/master/examples/before.jpg)
 ### After
-![After](https://github.com/asiryan/Local-Laplacian-filters/blob/master/examples/after.jpg)
+[After](https://github.com/asiryan/Local-Laplacian-filters/blob/master/examples/after.jpg)
 
 Asiryan Valeriy Mishevich, © 2019.
 

@@ -223,11 +223,11 @@
             this.trackBar5.AutoSize = false;
             this.trackBar5.Location = new System.Drawing.Point(3, 458);
             this.trackBar5.Maximum = 100;
+            this.trackBar5.Minimum = -100;
             this.trackBar5.Name = "trackBar5";
             this.trackBar5.Size = new System.Drawing.Size(243, 26);
             this.trackBar5.TabIndex = 21;
             this.trackBar5.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar5.Value = 10;
             this.trackBar5.Scroll += new System.EventHandler(this.trackBar5_Scroll);
             // 
             // textBox5

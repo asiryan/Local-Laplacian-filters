@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using UMapx.Imaging;
 using UMapx.Transform;
-using UMapx.Core;
 
 namespace LocalLaplacianFilters
 {
@@ -121,7 +120,16 @@ namespace LocalLaplacianFilters
         }
         private void trackBar5_Scroll(object sender, EventArgs e)
         {
-            textBox5.Text = (trackBar5.Value / 10.0 - 1.0).ToString();
+            int v = trackBar5.Value;
+
+            if (v < 0)
+            {
+                textBox5.Text = (v / 100.0).ToString();
+            }
+            else
+            {
+                textBox5.Text = (v / 10.0).ToString();
+            }
         }
 
         // отжатие trackBar
@@ -129,7 +137,7 @@ namespace LocalLaplacianFilters
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                trackBar5.Value = 10;
+                trackBar5.Value = 0;
                 trackBar5_Scroll(sender, e);
             }
             pictureBox1.Image = Apply(image);

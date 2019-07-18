@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Asiryan Valeriy")]
 [assembly: AssemblyProduct("Local Laplacian filters")]
-[assembly: AssemblyCopyright("Asiryan Valeriy, Copyright © 2019")]
+[assembly: AssemblyCopyright("Asiryan Valeriy, © 2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

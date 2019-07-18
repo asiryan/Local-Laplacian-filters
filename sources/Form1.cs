@@ -22,6 +22,13 @@ namespace LocalLaplacianFilters
         public Form1()
         {
             InitializeComponent();
+
+            // owner
+            form2.Owner = this;
+            form3.Owner = this;
+            form4.Owner = this;
+
+            // handlers
             pictureBox1.AllowDrop = true;
             pictureBox1.DragDrop += new DragEventHandler(pictureBox1_DragDrop);
             pictureBox1.DragEnter += new DragEventHandler(pictureBox1_DragEnter);
@@ -58,25 +65,25 @@ namespace LocalLaplacianFilters
                 openToolStripMenuItem_Click(sender, e);
                 return;
             }
-            else if (e.Control && e.KeyCode == Keys.S)
+            else if (e.Control && e.KeyCode == Keys.S && saveToolStripMenuItem.Enabled)
             {
                 e.SuppressKeyPress = true;
                 saveToolStripMenuItem_Click(sender, e);
                 return;
             }
-            else if (e.Control && e.KeyCode == Keys.X)
+            else if (e.Control && e.KeyCode == Keys.X && closeToolStripMenuItem.Enabled)
             {
                 e.SuppressKeyPress = true;
                 closeToolStripMenuItem_Click(sender, e);
                 return;
             }
-            else if (e.Control && e.KeyCode == Keys.R)
+            else if (e.Control && e.KeyCode == Keys.R && reloadToolStripMenuItem.Enabled)
             {
                 e.SuppressKeyPress = true;
                 reloadToolStripMenuItem_Click(sender, e);
                 return;
             }
-            else if (e.Control && e.KeyCode == Keys.Z)
+            else if (e.Control && e.KeyCode == Keys.Z && undoToolStripMenuItem1.Enabled)
             {
                 e.SuppressKeyPress = true;
                 undoToolStripMenuItem1_Click(sender, e);
@@ -114,7 +121,8 @@ namespace LocalLaplacianFilters
                 file = parse;
                 Booleans(true);
             }
-            catch { MessageBox.Show("File is not an image", "Error"); }
+            catch { MessageBox.Show("File is not an image", "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
         }
 
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
@@ -161,7 +169,8 @@ namespace LocalLaplacianFilters
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(" Local Laplacian filters \n Developed by Asiryan Valeriy, 2019 \n Originals: S. Paris, S.W. Hasinoff, J. Kautz, M. Aubry, 2011-2014 \n Powered by UMapx.NET", "About");
+            MessageBox.Show(" Local Laplacian filters \n Originals: S. Paris, S.W. Hasinoff, J. Kautz, M. Aubry, 2011-2014 \n Developed by V.M. Asiryan, 2019 \n Powered by UMapx.NET", "About", MessageBoxButtons.OK,
+                            MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -176,10 +185,12 @@ namespace LocalLaplacianFilters
 
             if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                this.Cursor = Cursors.WaitCursor;
                 redo = (Bitmap)image.Clone();
                 undoToolStripMenuItem1.Enabled = true;
                 image = form2.Apply(image);
                 pictureBox1.Image = image;
+                this.Cursor = Cursors.Arrow;
             }
         }
 
@@ -190,10 +201,12 @@ namespace LocalLaplacianFilters
 
             if (form3.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                this.Cursor = Cursors.WaitCursor;
                 redo = (Bitmap)image.Clone();
                 undoToolStripMenuItem1.Enabled = true;
                 image = form3.Apply(image);
                 pictureBox1.Image = image;
+                this.Cursor = Cursors.Arrow;
             }
         }
 
@@ -204,10 +217,13 @@ namespace LocalLaplacianFilters
 
             if (form4.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
+                this.Cursor = Cursors.WaitCursor;
+                
                 redo = (Bitmap)image.Clone();
                 undoToolStripMenuItem1.Enabled = true;
                 image = form4.Apply(image);
                 pictureBox1.Image = image;
+                this.Cursor = Cursors.Arrow;
             }
         }
 

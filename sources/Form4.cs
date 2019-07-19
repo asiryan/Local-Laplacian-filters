@@ -28,6 +28,7 @@ namespace LocalLaplacianFilters
         }
         private void Form4_Load(object sender, EventArgs e)
         {
+            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             pictureBox1.Image = Apply(image);
         }
 

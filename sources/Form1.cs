@@ -16,6 +16,7 @@ namespace LocalLaplacianFilters
         SaveFileDialog saveFile = new SaveFileDialog();
         Bitmap image, redo, dummy;
         string file;
+        string text = "Local Laplacian filters";
         #endregion
 
         #region Form voids
@@ -96,13 +97,20 @@ namespace LocalLaplacianFilters
         {
             if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                file = openFile.FileName;
-                image = (Bitmap)Bitmap.FromFile(file);
-                pictureBox1.Image = image;
-                Booleans(true);
+                Open(openFile.FileName);
             }
         }
 
+        void pictureBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            string parse = ((string[])(e.Data.GetData(DataFormats.FileDrop, true)))[0];
+            try
+            {
+                Open(parse);
+            }
+            catch { MessageBox.Show("File is not an image", "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
+        }
         void pictureBox1_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -111,58 +119,23 @@ namespace LocalLaplacianFilters
                 e.Effect = DragDropEffects.None;
         }
 
-        void pictureBox1_DragDrop(object sender, DragEventArgs e)
-        {
-            string parse = ((string[])(e.Data.GetData(DataFormats.FileDrop, true)))[0];
-            try
-            {
-                image = (Bitmap)Bitmap.FromFile(parse);
-                pictureBox1.Image = image;
-                file = parse;
-                Booleans(true);
-            }
-            catch { MessageBox.Show("File is not an image", "Error", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
-        }
-
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            image = (Bitmap)Bitmap.FromFile(file);
-            pictureBox1.Image = image;
-            Booleans(true);
+            Open(file);
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            redo = image = null;
-            pictureBox1.Image = null;
-            Booleans(false);
+            Open(null);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (saveFile.FilterIndex == 1)
-                {
-                    image.Save(saveFile.FileName, ImageFormat.Bmp);
-                }
-                if (saveFile.FilterIndex == 2)
-                {
-                    image.Save(saveFile.FileName, ImageFormat.Jpeg);
-                }
-                if (saveFile.FilterIndex == 3)
-                {
-                    image.Save(saveFile.FileName, ImageFormat.Png);
-                }
-                if (saveFile.FilterIndex == 4)
-                {
-                    image.Save(saveFile.FileName, ImageFormat.Gif);
-                }
-                if (saveFile.FilterIndex == 5)
-                {
-                    image.Save(saveFile.FileName, ImageFormat.Tiff);
-                }
+                Cursor = Cursors.WaitCursor;
+                Save(saveFile.FileName, saveFile.FilterIndex);
+                Cursor = Cursors.Arrow;
             }
             return;
         }
@@ -185,12 +158,12 @@ namespace LocalLaplacianFilters
 
             if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 redo = (Bitmap)image.Clone();
                 undoToolStripMenuItem1.Enabled = true;
                 image = form2.Apply(image);
                 pictureBox1.Image = image;
-                this.Cursor = Cursors.Arrow;
+                Cursor = Cursors.Arrow;
             }
         }
 
@@ -201,12 +174,12 @@ namespace LocalLaplacianFilters
 
             if (form3.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
+                Cursor = Cursors.WaitCursor;
                 redo = (Bitmap)image.Clone();
                 undoToolStripMenuItem1.Enabled = true;
                 image = form3.Apply(image);
                 pictureBox1.Image = image;
-                this.Cursor = Cursors.Arrow;
+                Cursor = Cursors.Arrow;
             }
         }
 
@@ -217,13 +190,12 @@ namespace LocalLaplacianFilters
 
             if (form4.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                this.Cursor = Cursors.WaitCursor;
-                
+                Cursor = Cursors.WaitCursor;
                 redo = (Bitmap)image.Clone();
                 undoToolStripMenuItem1.Enabled = true;
                 image = form4.Apply(image);
                 pictureBox1.Image = image;
-                this.Cursor = Cursors.Arrow;
+                Cursor = Cursors.Arrow;
             }
         }
 
@@ -231,60 +203,108 @@ namespace LocalLaplacianFilters
         {
             if (undoToolStripMenuItem1.Enabled)
             {
-                if (undoToolStripMenuItem1.Text == "Undo")
-                {
-                    dummy = redo; redo = image; image = dummy;
-                    undoToolStripMenuItem1.Text = "Redo";
-                    pictureBox1.Image = image;
-                }
-                else
-                {
-                    dummy = redo; redo = image; image = dummy;
-                    undoToolStripMenuItem1.Text = "Undo";
-                    pictureBox1.Image = image;
-                }
+                // swap images
+                dummy = redo; redo = image; image = dummy;
+                undoToolStripMenuItem1.Text = (undoToolStripMenuItem1.Text == "Undo") ? "Redo" : "Undo";
+                pictureBox1.Image = image;
             }
             return;
         }
         #endregion
 
         #region Private voids
-        private void Booleans(bool fix)
+        private void Open(string path)
         {
-            if (fix)
+            Cursor = Cursors.WaitCursor;
+            bool flag = path != null;
+
+            if (flag)
+            {
+                // open image
+                image = (Bitmap)Bitmap.FromFile(path);
+                pictureBox1.Image = image;
+                file = path;
+                Text = text + ": " + System.IO.Path.GetFileName(file);
+            }
+            else
+            {
+                // close image
+                pictureBox1.Image = redo = image = null;
+                file = null;
+                Text = text;
+            }
+
+            Options(flag);
+            Cursor = Cursors.Arrow;
+            return;
+        }
+
+        private void Save(string path, int index)
+        {
+            Cursor = Cursors.WaitCursor;
+
+            switch (index)
+            {
+                case 1:
+                    image.Save(saveFile.FileName, ImageFormat.Bmp);
+                    break;
+                case 2:
+                    image.Save(saveFile.FileName, ImageFormat.Jpeg);
+                    break;
+                case 3:
+                    image.Save(saveFile.FileName, ImageFormat.Png);
+                    break;
+                case 4:
+                    image.Save(saveFile.FileName, ImageFormat.Gif);
+                    break;
+                default:
+                    image.Save(saveFile.FileName, ImageFormat.Tiff);
+                    break;
+            }
+
+            file = saveFile.FileName;
+            Text = text + ": " + System.IO.Path.GetFileName(file);
+            Cursor = Cursors.Arrow;
+            return;
+        }
+
+        private void Options(bool flag)
+        {
+            if (flag)
             {
                 // file
-                reloadToolStripMenuItem.Enabled = true;
-                closeToolStripMenuItem.Enabled = true;
-                saveToolStripMenuItem.Enabled = true;
-                
+                reloadToolStripMenuItem.Enabled = closeToolStripMenuItem.Enabled = saveToolStripMenuItem.Enabled = true;
+
                 // filtes
-                localLaplacianToolStripMenuItem.Enabled = true;
-                saturationToolStripMenuItem.Enabled = true;
-                exposureToolStripMenuItem.Enabled = true;
+                localLaplacianToolStripMenuItem.Enabled =
+                    saturationToolStripMenuItem.Enabled = 
+                    exposureToolStripMenuItem.Enabled = true;
                 undoToolStripMenuItem1.Enabled = false;
                 return;
             }
             else
             {
                 // file
-                closeToolStripMenuItem.Enabled = false;
-                saveToolStripMenuItem.Enabled = false;
+                reloadToolStripMenuItem.Enabled = 
+                    closeToolStripMenuItem.Enabled = 
+                    saveToolStripMenuItem.Enabled = false;
 
                 // filters
-                localLaplacianToolStripMenuItem.Enabled = false;
-                saturationToolStripMenuItem.Enabled = false;
-                exposureToolStripMenuItem.Enabled = false;
-                undoToolStripMenuItem1.Enabled = false;
+                localLaplacianToolStripMenuItem.Enabled = 
+                    saturationToolStripMenuItem.Enabled = 
+                    exposureToolStripMenuItem.Enabled = 
+                    undoToolStripMenuItem1.Enabled = false;
                 return;
             }
         }
+
         private Space GetSpace(int index)
         {
             if (index == 0)
                 return Space.YCbCr;
             else if (index == 1)
                 return Space.HSB;
+
             return Space.HSL;
         }
         #endregion

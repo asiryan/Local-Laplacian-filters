@@ -6,7 +6,7 @@ Implementation of the local Laplacian filters image processing algorithm in C# u
 ### After
 ![After](https://github.com/asiryan/Local-Laplacian-filters/blob/master/examples/after.jpg)
 
-Asiryan Valeriy Mishevich, © 2019.
+Asiryan Valeriy, © 2019.
 
 ## References
 1. Paris, Sylvain, Samuel W. Hasinoff, and Jan Kautz. Local Laplacian filters: edge-aware image processing with a Laplacian pyramid, ACM Trans. Graph. 30.4 (2011): 68. [(pdf)](https://people.csail.mit.edu/sparis/publi/2011/siggraph/Paris_11_Local_Laplacian_Filters_lowres.pdf)

@@ -51,6 +51,7 @@ namespace LocalLaplacianFilters
             set
             {
                 this.space = value;
+                trackBar1.Enabled = (this.space != UMapx.Imaging.Space.Grayscale);
             }
         }
 
@@ -78,7 +79,6 @@ namespace LocalLaplacianFilters
         #endregion
 
         #region TrackBars
-        // движение по trackBar
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             textBox1.Text = trackBar1.Value.ToString();
@@ -88,7 +88,6 @@ namespace LocalLaplacianFilters
             textBox2.Text = trackBar2.Value.ToString();
         }
 
-        // отжатие trackBar
         void trackBar2_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)

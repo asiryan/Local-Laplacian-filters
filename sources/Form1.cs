@@ -53,6 +53,7 @@ namespace LocalLaplacianFilters
             comboBox1.Items.Add(Space.YCbCr);
             comboBox1.Items.Add(Space.HSB);
             comboBox1.Items.Add(Space.HSL);
+            comboBox1.Items.Add(Space.Grayscale);
             comboBox1.SelectedIndex = 0;
         }
 
@@ -300,12 +301,17 @@ namespace LocalLaplacianFilters
 
         private Space GetSpace(int index)
         {
-            if (index == 0)
-                return Space.YCbCr;
-            else if (index == 1)
-                return Space.HSB;
-
-            return Space.HSL;
+            switch (index)
+            {
+                case 0:
+                    return Space.YCbCr;
+                case 1:
+                    return Space.HSB;
+                case 2:
+                    return Space.HSL;
+                default:
+                    return Space.Grayscale;
+            }
         }
         #endregion
     }

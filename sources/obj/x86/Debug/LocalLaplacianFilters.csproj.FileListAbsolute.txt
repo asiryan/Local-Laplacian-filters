@@ -1,0 +1,25 @@
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\bin\Debug\Local Laplacian filters.exe.config
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\bin\Debug\Local Laplacian filters.exe
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\bin\Debug\Local Laplacian filters.pdb
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Form1.resources
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Form2.resources
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Form3.resources
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Form4.resources
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Properties.Resources.resources
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\Local Laplacian filters.exe
+C:\Users\User\Desktop\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\Local Laplacian filters.pdb
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\bin\Debug\Local Laplacian filters.exe.config
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\Local Laplacian filters.exe
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\Local Laplacian filters.pdb
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\bin\Debug\Local Laplacian filters.exe
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\bin\Debug\Local Laplacian filters.pdb
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Form1.resources
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Form2.resources
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Form3.resources
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Form4.resources
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.Properties.Resources.resources
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\obj\x86\Debug\LocalLaplacianFilters.csproj.GenerateResource.Cache
+C:\Users\User\Desktop\Мои программы\Cryptworks Projects\Local Laplacian filters\LocalLaplacianFilters\bin\Debug\UMapx.dll

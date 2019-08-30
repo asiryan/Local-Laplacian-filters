@@ -51,7 +51,7 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="UMapx">
-      <HintPath>bin\Release\datafiles\UMapx.dll</HintPath>
+      <HintPath>bin\Release\UMapx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

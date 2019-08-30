@@ -101,7 +101,6 @@ namespace LocalLaplacianFilters
         #endregion
 
         #region TrackBars
-        // движение по trackBar
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             textBox1.Text = trackBar1.Value.ToString();
@@ -132,7 +131,6 @@ namespace LocalLaplacianFilters
             }
         }
 
-        // отжатие trackBar
         void trackBar5_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)

@@ -1,6 +1,7 @@
 # Local Laplacian filters
-![](https://github.com/asiryan/Local-Laplacian-filters/blob/master/examples/LLf_preview.jpg)
 Desktop application for local Laplacian filtering of images developed in C# using UMapx.NET Framework.
+
+**Powered by UMapx.NET**  
 
 ### Before
 ![Before](https://github.com/asiryan/Local-Laplacian-filters/blob/master/examples/before.jpg)

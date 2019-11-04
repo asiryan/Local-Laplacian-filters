@@ -1,5 +1,5 @@
 # Local Laplacian filters
-Desktop application for local Laplacian filtering of images developed in C# using UMapx.NET Framework.
+Desktop application for local Laplacian filtering of images developed in C#.
 
 **Powered by UMapx.NET**  
 

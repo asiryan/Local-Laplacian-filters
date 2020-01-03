@@ -8,14 +8,9 @@ namespace LocalLaplacianFilters
     public partial class Form4 : Form
     {
         #region Private data
-        double brightness = 0;
-        double exposure = 0;
-        double gamma = 0;
+        ExposureGammaFilter egf = new ExposureGammaFilter();
         Bitmap image;
         Space space;
-        BrightnessCorrection bc;
-        ShiftCorrection sc;
-        GammaCorrection gc;
         #endregion
 
         #region Form voids
@@ -35,21 +30,13 @@ namespace LocalLaplacianFilters
         public Bitmap Apply(Bitmap image)
         {
             // parsing
-            this.brightness = double.Parse(textBox1.Text) / 100.0;
-            this.exposure = double.Parse(textBox2.Text) / 100.0;
-            this.gamma = Math.Pow(2, double.Parse(textBox3.Text) / 100.0);
+            double brightness = double.Parse(textBox1.Text) / 100.0;
+            double exposure = double.Parse(textBox2.Text) / 100.0;
+            double gamma = Math.Pow(2, double.Parse(textBox3.Text) / 100.0);
 
-            // applying
-            Bitmap dummy = new Bitmap(image);
-            this.bc = new BrightnessCorrection(this.brightness, this.space);
-            bc.Apply(dummy);
-
-            this.sc = new ShiftCorrection(this.exposure, this.space);
-            sc.Apply(dummy);
-
-            this.gc = new GammaCorrection(this.gamma, this.space);
-            gc.Apply(dummy);
-            return dummy;
+            // applying filter
+            egf.SetParams(brightness, exposure, gamma, space);
+            return egf.Apply(image);
         }
 
         public Space Space
@@ -68,11 +55,12 @@ namespace LocalLaplacianFilters
                 int height = value.Height;
 
                 int min = Math.Min(width, height);
-                int mmm = pictureBox1.Width;
-                double k = min / (double)mmm;
+                int box = pictureBox1.Width;
+                double k = min / (double)box;
 
-                image = new Bitmap(value, (int)(width / k + 1), (int)(height / k + 1));
-                image = image.Clone(new Rectangle(0, 0, mmm, mmm), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                image = (new Bitmap(value, (int)(width / k + 1), (int)(height / k + 1))).
+                    Clone(new Rectangle(0, 0, box, box), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
                 pictureBox1.Image = image;
             }
         }

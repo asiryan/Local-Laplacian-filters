@@ -8,12 +8,9 @@ namespace LocalLaplacianFilters
     public partial class Form3 : Form
     {
         #region Private data
-        double saturation = 0;
-        double contrast = 0;
+        SaturationContrastFilter scf = new SaturationContrastFilter();
         Bitmap image;
         Space space;
-        ContrastEnhancement ce;
-        SaturationCorrection se;
         #endregion
 
         #region Form voids
@@ -33,17 +30,12 @@ namespace LocalLaplacianFilters
         public Bitmap Apply(Bitmap image)
         {
             // parsing
-            this.saturation = int.Parse(textBox1.Text);
-            this.contrast = double.Parse(textBox2.Text) / 100.0;
+            double saturation = int.Parse(textBox1.Text);
+            double contrast = double.Parse(textBox2.Text) / 100.0;
 
             // applying
-            Bitmap dummy = new Bitmap(image);
-            this.se = new SaturationCorrection(this.saturation);
-            se.Apply(dummy);
-
-            this.ce = new ContrastEnhancement(this.contrast, this.space);
-            ce.Apply(dummy);
-            return dummy;
+            scf.SetParams(saturation, contrast, space);
+            return scf.Apply(image);
         }
 
         public Space Space
@@ -63,11 +55,12 @@ namespace LocalLaplacianFilters
                 int height = value.Height;
 
                 int min = Math.Min(width, height);
-                int mmm = pictureBox1.Width;
-                double k = min / (double)mmm;
+                int box = pictureBox1.Width;
+                double k = min / (double)box;
 
-                image = new Bitmap(value, (int)(width / k + 1), (int)(height / k + 1));
-                image = image.Clone(new Rectangle(0, 0, mmm, mmm), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                image = (new Bitmap(value, (int)(width / k + 1), (int)(height / k + 1))).
+                    Clone(new Rectangle(0, 0, box, box), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+
                 pictureBox1.Image = image;
             }
         }

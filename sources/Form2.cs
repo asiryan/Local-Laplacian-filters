@@ -2,23 +2,15 @@
 using System.Drawing;
 using System.Windows.Forms;
 using UMapx.Imaging;
-using UMapx.Transform;
 
 namespace LocalLaplacianFilters
 {
     public partial class Form2 : Form
     {
         #region Private data
-        int lightshadows;
-        double sigma;
-        int discrets;
-        int levels;
-        double factor;
+        GeneralizedLocalLaplacianFilter gllf = new GeneralizedLocalLaplacianFilter();
         Space space = Space.YCbCr;
         Bitmap image;
-        GammaCorrection gc;
-        LocalLaplacianFilter llf;
-        BitmapBlender blend;
         #endregion
 
         #region Form voids
@@ -38,7 +30,7 @@ namespace LocalLaplacianFilters
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             pictureBox1.Image = Apply(image);
         }
-        
+
         public Bitmap Image
         {
             set
@@ -68,31 +60,15 @@ namespace LocalLaplacianFilters
         public Bitmap Apply(Bitmap image)
         {
             // parsing
-            this.lightshadows = int.Parse(textBox1.Text);
-            this.sigma = double.Parse(textBox2.Text);
-            this.discrets = int.Parse(textBox3.Text);
-            this.levels = int.Parse(textBox4.Text);
-            this.factor = double.Parse(textBox5.Text);
+            double lightshadows = Math.Pow(2, double.Parse(textBox1.Text) / 100.0);
+            double sigma = double.Parse(textBox2.Text);
+            int discrets = int.Parse(textBox3.Text);
+            int levels = int.Parse(textBox4.Text);
+            double factor = double.Parse(textBox5.Text);
 
-            // lights and shadows
-            this.gc = new GammaCorrection(0, this.space);
-            int r = 2 * lightshadows + 1;
-            int v = r >> 1, i;
-            Bitmap[] images = new Bitmap[r];
-            Bitmap dummy;
-
-            for (i = 0; i < r; i++)
-            {
-                dummy = new Bitmap(image);
-                gc.Gamma = Math.Pow(2.0, i - v);
-                gc.Apply(dummy);
-                images[i] = dummy;
-            }
-
-            // blending
-            this.llf = new LocalLaplacianFilter(this.sigma, this.discrets, this.levels, this.factor);
-            this.blend = new BitmapBlender(this.llf, this.space);
-            return blend.Apply(images);
+            // applying filter
+            gllf.SetParams(lightshadows, sigma, discrets, levels, factor, space);
+            return gllf.Apply(image);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -108,7 +84,7 @@ namespace LocalLaplacianFilters
         }
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            textBox2.Text = (trackBar2.Value / 100.0 + 0.01).ToString();
+            textBox2.Text = (trackBar2.Value / 1000.0 + 0.001).ToString();
         }
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
@@ -143,14 +119,29 @@ namespace LocalLaplacianFilters
         }
         void trackBar4_MouseUp(object sender, MouseEventArgs e)
         {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                trackBar4.Value = 5;
+                trackBar4_Scroll(sender, e);
+            }
             pictureBox1.Image = Apply(image);
         }
         void trackBar3_MouseUp(object sender, MouseEventArgs e)
         {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                trackBar3.Value = 20;
+                trackBar3_Scroll(sender, e);
+            }
             pictureBox1.Image = Apply(image);
         }
         void trackBar2_MouseUp(object sender, MouseEventArgs e)
         {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                trackBar2.Value = 49;
+                trackBar2_Scroll(sender, e);
+            }
             pictureBox1.Image = Apply(image);
         }
         void trackBar1_MouseUp(object sender, MouseEventArgs e)

@@ -89,7 +89,8 @@
             // 
             this.trackBar1.AutoSize = false;
             this.trackBar1.Location = new System.Drawing.Point(3, 267);
-            this.trackBar1.Maximum = 5;
+            this.trackBar1.Maximum = 100;
+            this.trackBar1.Minimum = -100;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(243, 26);
             this.trackBar1.TabIndex = 9;
@@ -121,12 +122,12 @@
             // 
             this.trackBar2.AutoSize = false;
             this.trackBar2.Location = new System.Drawing.Point(3, 317);
-            this.trackBar2.Maximum = 99;
+            this.trackBar2.Maximum = 199;
             this.trackBar2.Name = "trackBar2";
             this.trackBar2.Size = new System.Drawing.Size(243, 26);
             this.trackBar2.TabIndex = 12;
             this.trackBar2.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar2.Value = 4;
+            this.trackBar2.Value = 49;
             this.trackBar2.Scroll += new System.EventHandler(this.trackBar2_Scroll);
             // 
             // textBox2

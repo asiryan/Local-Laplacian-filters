@@ -50,11 +50,13 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UMapx">
-      <HintPath>bin\Release\UMapx.dll</HintPath>
+    <Reference Include="UMapx, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Валера\Development\Cryptworks Projects\Crypworks Projects\UMapx.NET Framework 4.0\compile\library_EN\UMapx Framework 4.0\bin\Release\UMapx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Filters.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

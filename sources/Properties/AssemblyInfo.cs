@@ -7,11 +7,11 @@ using System.Resources;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("Local Laplacian filters")]
-[assembly: AssemblyDescription("Local Laplacian filters")]
+[assembly: AssemblyDescription("Desktop application for local Laplacian image filtering.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Asiryan Valeriy")]
 [assembly: AssemblyProduct("Local Laplacian filters")]
-[assembly: AssemblyCopyright("Asiryan Valeriy, © 2019")]
+[assembly: AssemblyCopyright("Asiryan Valeriy, © 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

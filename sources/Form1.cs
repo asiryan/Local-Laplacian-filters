@@ -143,7 +143,7 @@ namespace LocalLaplacianFilters
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(" Local Laplacian filters \n Originals: S. Paris, S.W. Hasinoff, J. Kautz, M. Aubry, 2011-2014 \n Developed by V.M. Asiryan, 2019 \n Powered by UMapx.NET", "About", MessageBoxButtons.OK,
+            MessageBox.Show(this, " Originals: S. Paris, S.W. Hasinoff, J. Kautz, M. Aubry, \n 2011-2014 \n Developed by V. Asiryan, 2019 \n Powered by UMapx.NET", "Local Laplacian filters", MessageBoxButtons.OK,
                             MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 

@@ -6,9 +6,9 @@ Desktop application for local Laplacian image filtering developed in C#.
 # Installation
 ## System requirements
 **Processor:** Intel® or AMD processor with 64-bit support (2 GHz or faster processor)  
-**Operating system:** Microsoft Windows 7 with Service Pack 1 (64-bit)  
+**Operating system:** Microsoft Windows 7 (Microsoft Windows 10 recommended)
 **RAM:** 2 GB or more of RAM  
-**Monitor resolution:** 1280 x 800 display  
+**Minimal resolution:** 1280 x 800 px  
 
 ## Dependencies
 Download and move [UMapx.dll](https://github.com/asiryan/UMapx.NET/tree/master/release) to the root program [folder](https://github.com/asiryan/Local-Laplacian-filters/tree/master/app).

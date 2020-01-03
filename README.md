@@ -14,7 +14,7 @@ Desktop application for local Laplacian image filtering developed in C#.
 Download and install [.NET Framework 4](https://www.microsoft.com/en-US/Download/confirmation.aspx?id=17718).  
 Download and move [UMapx.dll](https://github.com/asiryan/UMapx.NET/tree/master/release) to the root program [folder](https://github.com/asiryan/Local-Laplacian-filters/tree/master/app).  
 
-# Example
+# Application
 ## Before
 ![Before](docs/examples/before.jpg)
 ## After

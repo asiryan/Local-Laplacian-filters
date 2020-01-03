@@ -6,7 +6,7 @@ Desktop application for local Laplacian image filtering developed in C#.
 # Installation
 ## System requirements
 **Processor:** Intel® or AMD processor with 64-bit support (2 GHz or faster processor)  
-**Operating system:** Microsoft Windows 7 (Microsoft Windows 10 recommended)
+**Operating system:** Microsoft Windows 7 (Microsoft Windows 10 recommended)  
 **RAM:** 2 GB or more of RAM  
 **Minimal resolution:** 1280 x 800 px  
 

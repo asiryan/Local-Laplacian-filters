@@ -183,4 +183,20 @@ namespace LocalLaplacianFilters
         }
         #endregion
     }
+
+    public static class ImageHelper
+    {
+        #region Static voids
+        public static Bitmap Crop(Bitmap value, int box)
+        {
+            int width = value.Width;
+            int height = value.Height;
+            int min = Math.Min(width, height);
+            double k = min / (double)box;
+
+            return (new Bitmap(value, (int)(width / k + 1), (int)(height / k + 1))).
+                Clone(new Rectangle(0, 0, box, box), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+        }
+        #endregion
+    }
 }

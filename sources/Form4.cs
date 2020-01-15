@@ -51,16 +51,7 @@ namespace LocalLaplacianFilters
         {
             set
             {
-                int width = value.Width;
-                int height = value.Height;
-
-                int min = Math.Min(width, height);
-                int box = pictureBox1.Width;
-                double k = min / (double)box;
-
-                image = (new Bitmap(value, (int)(width / k + 1), (int)(height / k + 1))).
-                    Clone(new Rectangle(0, 0, box, box), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-
+                image = ImageHelper.Crop(value, pictureBox1.Width);
                 pictureBox1.Image = image;
             }
         }

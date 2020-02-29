@@ -1,6 +1,7 @@
-﻿using System;
+﻿using LocalLaplacianFilters.Filters;
+using System;
+using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Windows.Forms;
 using UMapx.Imaging;
 
@@ -12,10 +13,12 @@ namespace LocalLaplacianFilters
         Form2 form2 = new Form2();
         Form3 form3 = new Form3();
         Form4 form4 = new Form4();
+        Form5 form5 = new Form5();
         OpenFileDialog openFile = new OpenFileDialog();
         SaveFileDialog saveFile = new SaveFileDialog();
         Bitmap image, redo, dummy;
-        string file;
+        Space space;
+        string[] file;
         string text = "Local Laplacian filters";
         #endregion
 
@@ -24,17 +27,22 @@ namespace LocalLaplacianFilters
         {
             InitializeComponent();
 
+            // main
+            DoubleBuffered = true;
+            KeyDown += new KeyEventHandler(Form1_KeyDown);
+            KeyPreview = true;
+
             // owner
             form2.Owner = this;
             form3.Owner = this;
             form4.Owner = this;
+            form5.Owner = this;
 
-            // handlers
+            // elements
             pictureBox1.AllowDrop = true;
             pictureBox1.DragDrop += new DragEventHandler(pictureBox1_DragDrop);
             pictureBox1.DragEnter += new DragEventHandler(pictureBox1_DragEnter);
-            KeyDown += new KeyEventHandler(Form1_KeyDown);
-            KeyPreview = true;
+            return;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -43,6 +51,7 @@ namespace LocalLaplacianFilters
             openFile.Filter = "BMP (*.bmp)|*.bmp|JPEG (*.jpg)|*.jpg|PNG (*.png)|*.png|GIF (*.gif)|*.gif|TIFF (*.tiff)|*.tiff";
             openFile.FilterIndex = 2;
             openFile.RestoreDirectory = true;
+            openFile.Multiselect = true;
 
             // savefile
             saveFile.Filter = "BMP (*.bmp)|*.bmp|JPEG (*.jpg)|*.jpg|PNG (*.png)|*.png|GIF (*.gif)|*.gif|TIFF (*.tiff)|*.tiff";
@@ -55,6 +64,7 @@ namespace LocalLaplacianFilters
             comboBox1.Items.Add(Space.HSL);
             comboBox1.Items.Add(Space.Grayscale);
             comboBox1.SelectedIndex = 0;
+            return;
         }
 
         void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -98,21 +108,38 @@ namespace LocalLaplacianFilters
         {
             if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Open(openFile.FileName);
+                TryOpen(openFile.FileNames);
             }
+            return;
         }
 
-        void pictureBox1_DragDrop(object sender, DragEventArgs e)
+        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string parse = ((string[])(e.Data.GetData(DataFormats.FileDrop, true)))[0];
-            try
-            {
-                Open(parse);
-            }
-            catch { MessageBox.Show("File is not an image", "Error", MessageBoxButtons.OK,
-                            MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
+            TryOpen(file);
+            return;
         }
-        void pictureBox1_DragEnter(object sender, DragEventArgs e)
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TryOpen();
+            return;
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                TrySave(saveFile.FileName, saveFile.FilterIndex);
+            }
+            return;
+        }
+
+        private void pictureBox1_DragDrop(object sender, DragEventArgs e)
+        {
+            TryOpen((string[])(e.Data.GetData(DataFormats.FileDrop, true)));
+        }
+
+        private void pictureBox1_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.All;
@@ -120,31 +147,17 @@ namespace LocalLaplacianFilters
                 e.Effect = DragDropEffects.None;
         }
 
-        private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Open(file);
-        }
-
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Open(null);
-        }
-
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (saveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                Cursor = Cursors.WaitCursor;
-                Save(saveFile.FileName, saveFile.FilterIndex);
-                Cursor = Cursors.Arrow;
-            }
-            return;
-        }
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, " Originals: S. Paris, S.W. Hasinoff, J. Kautz, M. Aubry, \n 2011-2014 \n Developed by V. Asiryan, 2019 \n Powered by UMapx.NET", "Local Laplacian filters", MessageBoxButtons.OK,
-                            MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            MessageBox.Show(this, " Originals " +
+                "\n Tom Mertens, Jan Kautz, Frank Van Reeth," +
+                "\n Sylvain Paris, Samuel W. Hasinoff, Mathieu Aubry" +
+                "\n 2007-2014 \n" +
+                "\n Developed by Valery Asiryan" +
+                "\n Powered by UMapx.NET" +
+                "\n 2019-2020", 
+                "Local Laplacian filters",
+                MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -155,7 +168,7 @@ namespace LocalLaplacianFilters
         private void localLaplacianToolStripMenuItem_Click(object sender, EventArgs e)
         {
             form2.Image = image;
-            form2.Space = GetSpace(comboBox1.SelectedIndex);
+            form2.Space = space;
 
             if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -166,12 +179,13 @@ namespace LocalLaplacianFilters
                 pictureBox1.Image = image;
                 Cursor = Cursors.Arrow;
             }
+            return;
         }
 
         private void saturationToolStripMenuItem_Click(object sender, EventArgs e)
         {
             form3.Image = image;
-            form3.Space = GetSpace(comboBox1.SelectedIndex);
+            form3.Space = space;
 
             if (form3.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -182,12 +196,13 @@ namespace LocalLaplacianFilters
                 pictureBox1.Image = image;
                 Cursor = Cursors.Arrow;
             }
+            return;
         }
 
         private void exposureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             form4.Image = image;
-            form4.Space = GetSpace(comboBox1.SelectedIndex);
+            form4.Space = space;
 
             if (form4.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
@@ -198,6 +213,7 @@ namespace LocalLaplacianFilters
                 pictureBox1.Image = image;
                 Cursor = Cursors.Arrow;
             }
+            return;
         }
 
         private void undoToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -211,72 +227,123 @@ namespace LocalLaplacianFilters
             }
             return;
         }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            space = ImageHelper.GetSpace(comboBox1.SelectedIndex);
+        }
         #endregion
 
         #region Private voids
-        private void Open(string path)
+        private void TryOpen(params string[] filenames)
         {
-            Cursor = Cursors.WaitCursor;
-            bool flag = path != null;
+            int length = filenames.Length;
 
-            if (flag)
+            // try to open
+            try
             {
-                // open image
-                image = (Bitmap)Bitmap.FromFile(path);
-                pictureBox1.Image = image;
-                file = path;
-                Text = text + ": " + System.IO.Path.GetFileName(file);
-            }
-            else
-            {
-                // close image
-                pictureBox1.Image = redo = image = null;
-                file = null;
-                Text = text;
-            }
+                if (length == 0)
+                {
+                    // null
+                    pictureBox1.Image = redo = image = null;
+                    file = null;
+                    Text = text;
+                    FormOptions(false);
+                }
+                else
+                {
+                    // collect input data
+                    List<Bitmap> images = new List<Bitmap>();
+                    Bitmap current = new Bitmap(filenames[0]);
+                    int width = current.Width;
+                    int height = current.Height;
+                    images.Add(current);
 
-            Options(flag);
-            Cursor = Cursors.Arrow;
+                    // do job
+                    for (int i = 1; i < length; i++)
+                    {
+                        current = new Bitmap(filenames[i]);
+                        if (current.Width != width ||
+                            current.Height != height)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            images.Add(current);
+                        }
+                    }
+
+                    Bitmap[] array = images.ToArray();
+                    length = array.Length;
+
+                    // exposure fusion
+                    if (length > 1)
+                    {
+                        form5.Images = array;
+
+                        if (form5.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                        {
+                            Cursor = Cursors.WaitCursor;
+                            image = form5.Apply(array);
+                            pictureBox1.Image = image;
+                            file = filenames;
+                            Cursor = Cursors.Arrow;
+                            FormOptions(true);
+                        }
+                    }
+                    // single image
+                    else
+                    {
+                        image = (Bitmap)Bitmap.FromFile(filenames[0]);
+                        pictureBox1.Image = image;
+                        file = new string[] { filenames[0] };
+                        Text = text + ": " + System.IO.Path.GetFileName(file[0]);
+                        FormOptions(true);
+                    }
+                    
+                    // clear data
+                    images.Clear();
+                    images = null;
+                    array = null;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Incorrect input image data", "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+            }
             return;
         }
 
-        private void Save(string path, int index)
+        private void TrySave(string filename, int index)
         {
-            Cursor = Cursors.WaitCursor;
-
-            switch (index)
+            // try to save
+            try
             {
-                case 1:
-                    image.Save(saveFile.FileName, ImageFormat.Bmp);
-                    break;
-                case 2:
-                    image.Save(saveFile.FileName, ImageFormat.Jpeg);
-                    break;
-                case 3:
-                    image.Save(saveFile.FileName, ImageFormat.Png);
-                    break;
-                case 4:
-                    image.Save(saveFile.FileName, ImageFormat.Gif);
-                    break;
-                default:
-                    image.Save(saveFile.FileName, ImageFormat.Tiff);
-                    break;
+                image.Save(filename, ImageHelper.GetImageFormat(index));
+                file = new string[] { filename };
+                Text = text + ": " + System.IO.Path.GetFileName(filename);
+                FormOptions(true);
             }
-
-            file = saveFile.FileName;
-            Text = text + ": " + System.IO.Path.GetFileName(file);
-            Cursor = Cursors.Arrow;
+            catch
+            {
+                MessageBox.Show("Incorrect output image data", "Error", MessageBoxButtons.OK,
+                            MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+            }
             return;
         }
 
-        private void Options(bool flag)
+        private void FormOptions(bool enabled)
         {
-            if (flag)
+            if (enabled)
             {
                 // file
-                reloadToolStripMenuItem.Enabled = closeToolStripMenuItem.Enabled = saveToolStripMenuItem.Enabled = true;
+                reloadToolStripMenuItem.Enabled = 
+                    closeToolStripMenuItem.Enabled =
+                    saveToolStripMenuItem.Enabled = true;
 
-                // filtes
+                // filters
                 localLaplacianToolStripMenuItem.Enabled =
                     saturationToolStripMenuItem.Enabled = 
                     exposureToolStripMenuItem.Enabled = true;
@@ -296,21 +363,6 @@ namespace LocalLaplacianFilters
                     exposureToolStripMenuItem.Enabled = 
                     undoToolStripMenuItem1.Enabled = false;
                 return;
-            }
-        }
-
-        private Space GetSpace(int index)
-        {
-            switch (index)
-            {
-                case 0:
-                    return Space.YCbCr;
-                case 1:
-                    return Space.HSB;
-                case 2:
-                    return Space.HSL;
-                default:
-                    return Space.Grayscale;
             }
         }
         #endregion

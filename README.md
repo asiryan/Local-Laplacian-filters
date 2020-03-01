@@ -15,8 +15,7 @@ Download and move [UMapx.dll](https://github.com/asiryan/UMapx.NET/tree/master/r
   
 
 # Application
-The application is designed for post-processing of raster images by correcting the dynamic range of brightness, local and global contrast, detail, saturation and exposure. It supports three color spaces: **YCbCr, HSL, HSB** and **grayscale** mode.  
-The application includes the function of creating **HDR**-images from a series of images of different exposures (exposure fusion [3]).
+The application is designed for post-processing of raster images by correcting the dynamic range of brightness, local and global contrast, detail, saturation and exposure. It supports three color spaces: **YCbCr, HSL, HSB** and **grayscale** mode. The application includes the function of creating **HDR**-images from a series of images of different exposures (exposure fusion [3]).  
 
 ## Before
 ![Before](docs/examples/before.jpg)

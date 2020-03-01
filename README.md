@@ -21,6 +21,7 @@ The application is designed for post-processing of raster images by correcting t
 ![Before](docs/examples/before.jpg)
 ## After
 ![After](docs/examples/after.jpg)
+Try it with test [images](https://yadi.sk/d/rix2T-ARtGm4Dg).  
 
 # License
 **GNU GPL v3.0**  

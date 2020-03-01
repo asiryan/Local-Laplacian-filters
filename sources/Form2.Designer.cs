@@ -198,7 +198,7 @@
             this.trackBar4.Size = new System.Drawing.Size(243, 26);
             this.trackBar4.TabIndex = 18;
             this.trackBar4.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBar4.Value = 5;
+            this.trackBar4.Value = 20;
             this.trackBar4.Scroll += new System.EventHandler(this.trackBar4_Scroll);
             // 
             // textBox4
@@ -210,7 +210,7 @@
             this.textBox4.ReadOnly = true;
             this.textBox4.Size = new System.Drawing.Size(36, 23);
             this.textBox4.TabIndex = 17;
-            this.textBox4.Text = "5";
+            this.textBox4.Text = "20";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label5
@@ -219,9 +219,9 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(9, 446);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(40, 15);
+            this.label5.Size = new System.Drawing.Size(42, 15);
             this.label5.TabIndex = 22;
-            this.label5.Text = "Factor";
+            this.label5.Text = "Details";
             // 
             // trackBar5
             // 
@@ -275,7 +275,7 @@
             this.MinimizeBox = false;
             this.Name = "Form2";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Local Laplacian filter";
+            this.Text = "Enhancement/details";
             this.Load += new System.EventHandler(this.Form2_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();

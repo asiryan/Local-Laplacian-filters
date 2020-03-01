@@ -113,7 +113,7 @@ namespace LocalLaplacianFilters
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                trackBar4.Value = 5;
+                trackBar4.Value = 20;
                 trackBar4_Scroll(sender, e);
             }
             pictureBox1.Image = Apply(image);

@@ -37,11 +37,13 @@ namespace LocalLaplacianFilters
             form3.Owner = this;
             form4.Owner = this;
             form5.Owner = this;
+            form5.TopMost = true;
 
             // elements
             pictureBox1.AllowDrop = true;
             pictureBox1.DragDrop += new DragEventHandler(pictureBox1_DragDrop);
             pictureBox1.DragEnter += new DragEventHandler(pictureBox1_DragEnter);
+            pictureBox1.MouseDoubleClick += pictureBox1_MouseDoubleClick;
             return;
         }
 
@@ -113,6 +115,11 @@ namespace LocalLaplacianFilters
             return;
         }
 
+        private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            openToolStripMenuItem_Click(sender, e);
+        }
+
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TryOpen(file);
@@ -156,7 +163,7 @@ namespace LocalLaplacianFilters
                 "\n Developed by Valery Asiryan" +
                 "\n Powered by UMapx.NET" +
                 "\n 2019-2020", 
-                "Local Laplacian filters",
+                text + ": About",
                 MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
@@ -165,7 +172,7 @@ namespace LocalLaplacianFilters
             Application.Exit();
         }
 
-        private void localLaplacianToolStripMenuItem_Click(object sender, EventArgs e)
+        private void enhancementToolStripMenuItem_Click(object sender, EventArgs e)
         {
             form2.Image = image;
             form2.Space = space;
@@ -274,6 +281,7 @@ namespace LocalLaplacianFilters
                         }
                     }
 
+                    // get images array
                     Bitmap[] array = images.ToArray();
                     length = array.Length;
 
@@ -281,6 +289,7 @@ namespace LocalLaplacianFilters
                     if (length > 1)
                     {
                         form5.Images = array;
+                        this.BringToFront();
 
                         if (form5.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                         {
@@ -288,6 +297,7 @@ namespace LocalLaplacianFilters
                             image = form5.Apply(array);
                             pictureBox1.Image = image;
                             file = filenames;
+                            Text = text + ": Exposure Fusion (" + file.Length + " images)";
                             Cursor = Cursors.Arrow;
                             FormOptions(true);
                         }
@@ -310,7 +320,7 @@ namespace LocalLaplacianFilters
             }
             catch
             {
-                MessageBox.Show("Incorrect input image data", "Error", MessageBoxButtons.OK,
+                MessageBox.Show("Incorrect input image data", text + ": Error", MessageBoxButtons.OK,
                             MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
             return;
@@ -324,11 +334,10 @@ namespace LocalLaplacianFilters
                 image.Save(filename, ImageHelper.GetImageFormat(index));
                 file = new string[] { filename };
                 Text = text + ": " + System.IO.Path.GetFileName(filename);
-                FormOptions(true);
             }
             catch
             {
-                MessageBox.Show("Incorrect output image data", "Error", MessageBoxButtons.OK,
+                MessageBox.Show("Incorrect output image data", text + ": Error", MessageBoxButtons.OK,
                             MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
             return;

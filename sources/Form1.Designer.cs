@@ -120,15 +120,15 @@
             // 
             this.localLaplacianToolStripMenuItem.Enabled = false;
             this.localLaplacianToolStripMenuItem.Name = "localLaplacianToolStripMenuItem";
-            this.localLaplacianToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
-            this.localLaplacianToolStripMenuItem.Text = "Local Laplacian filter";
-            this.localLaplacianToolStripMenuItem.Click += new System.EventHandler(this.localLaplacianToolStripMenuItem_Click);
+            this.localLaplacianToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
+            this.localLaplacianToolStripMenuItem.Text = "Enhancement/Details";
+            this.localLaplacianToolStripMenuItem.Click += new System.EventHandler(this.enhancementToolStripMenuItem_Click);
             // 
             // saturationToolStripMenuItem
             // 
             this.saturationToolStripMenuItem.Enabled = false;
             this.saturationToolStripMenuItem.Name = "saturationToolStripMenuItem";
-            this.saturationToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.saturationToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.saturationToolStripMenuItem.Text = "Saturation/Contrast";
             this.saturationToolStripMenuItem.Click += new System.EventHandler(this.saturationToolStripMenuItem_Click);
             // 
@@ -136,7 +136,7 @@
             // 
             this.exposureToolStripMenuItem.Enabled = false;
             this.exposureToolStripMenuItem.Name = "exposureToolStripMenuItem";
-            this.exposureToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.exposureToolStripMenuItem.Size = new System.Drawing.Size(187, 22);
             this.exposureToolStripMenuItem.Text = "Exposure/Gamma";
             this.exposureToolStripMenuItem.Click += new System.EventHandler(this.exposureToolStripMenuItem_Click);
             // 
@@ -144,7 +144,7 @@
             // 
             this.undoToolStripMenuItem1.Enabled = false;
             this.undoToolStripMenuItem1.Name = "undoToolStripMenuItem1";
-            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(182, 22);
+            this.undoToolStripMenuItem1.Size = new System.Drawing.Size(187, 22);
             this.undoToolStripMenuItem1.Text = "Undo";
             this.undoToolStripMenuItem1.Click += new System.EventHandler(this.undoToolStripMenuItem1_Click);
             // 
@@ -179,7 +179,7 @@
             this.pictureBox1.BackColor = System.Drawing.SystemColors.AppWorkspace;
             this.pictureBox1.Location = new System.Drawing.Point(0, 24);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(684, 538);
+            this.pictureBox1.Size = new System.Drawing.Size(684, 537);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
@@ -216,7 +216,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(684, 562);
+            this.ClientSize = new System.Drawing.Size(684, 561);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.pictureBox1);

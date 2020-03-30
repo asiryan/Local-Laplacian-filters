@@ -1,6 +1,4 @@
-   
 <p align="center"><img width="70%" src="docs/llf_main.png" /></p>
-   
 Desktop application for local Laplacian image filtering developed in C#.  
 
 **Powered by [UMapx.NET](https://github.com/asiryan/UMapx.NET)**

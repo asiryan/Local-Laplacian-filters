@@ -18,14 +18,14 @@ Download and move [UMapx.dll](https://github.com/asiryan/UMapx.NET/tree/master/r
 The application is designed for post-processing of raster images by correcting the dynamic range of brightness, local and global contrast, detail, saturation and exposure. It supports three color spaces: **YCbCr, HSL, HSB** and **grayscale** mode. The application includes the function of creating **HDR**-images from a series of images of different exposures (exposure fusion based on Laplacian pyramid technique [3]).  
 
 ## Exposure Fusion
-<p align="center"><img width="30%" src="samples/exposure_fusion/lighthouse_1.jpg"/><img width="30%" src="samples/exposure_fusion/lighthouse_2.jpg"/><img width="30%" src="samples/exposure_fusion/lighthouse_3.jpg"/></p>  
+<p align="center"><img width="33%" src="samples/exposure_fusion/lighthouse_1.jpg"/><img width="33%" src="samples/exposure_fusion/lighthouse_2.jpg"/><img width="33%" src="samples/exposure_fusion/lighthouse_3.jpg"/></p>  
 <p align="center"><b>Figure 1.</b> Exposure series</p>  
    
-<p align="center"><img width="90%" src="docs/examples/fused.jpg"/></p>  
+<p align="center"><img width="99%" src="docs/examples/fused.jpg"/></p>  
 <p align="center"><b>Figure 2.</b> Exposure fusion</p>  
 
 ## Enhancement
-<p align="center"><img width="90%" src="docs/examples/enhanced.jpg"/></p>  
+<p align="center"><img width="99%" src="docs/examples/enhanced.jpg"/></p>  
 <p align="center"><b>Figure 3.</b> Enhanced exposure fusion</p>   
 
 # License

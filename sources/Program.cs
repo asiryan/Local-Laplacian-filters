@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace LocalLaplacianFilters
@@ -15,6 +15,8 @@ namespace LocalLaplacianFilters
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
+            Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
             Application.Run(new Form1());
         }
     }

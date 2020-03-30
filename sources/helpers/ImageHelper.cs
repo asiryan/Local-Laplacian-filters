@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using UMapx.Imaging;
 
-namespace LocalLaplacianFilters.Filters
+namespace LocalLaplacianFilters.Helpers
 {
     /// <summary>
     /// Image helper class.

@@ -28,17 +28,19 @@ namespace LocalLaplacianFilters.Filters
         /// <summary>
         /// Sets filter params.
         /// </summary>
+        /// <param name="radius">Radius</param>
         /// <param name="lightshadows">Lights and shadows</param>
         /// <param name="sigma">Sigma</param>
         /// <param name="discrets">Number of samples</param>
         /// <param name="levels">Number of levels</param>
         /// <param name="factor">Factor</param>
         /// <param name="space">Colorspace</param>
-        public void SetParams(double lightshadows, double sigma, int discrets, int levels, double factor, Space space)
+        public void SetParams(int radius, double lightshadows, double sigma, int discrets, int levels, double factor, Space space)
         {
             this.bgc.Value = lightshadows;
             this.bgc.Space = space;
 
+            this.llf.Radius = radius;
             this.llf.Sigma = sigma;
             this.llf.N = discrets;
             this.llf.Levels = levels;
@@ -55,8 +57,13 @@ namespace LocalLaplacianFilters.Filters
         public Bitmap Apply(Bitmap image)
         {
             Bitmap clone = (Bitmap)image.Clone();
-            this.bgc.Apply(clone);
-            this.filter.Apply(clone);
+
+            if (this.bgc.Value != 1)
+                this.bgc.Apply(clone);
+            
+            if (this.llf.Factor != 0)
+                this.filter.Apply(clone);
+
             return clone;
         }
         #endregion

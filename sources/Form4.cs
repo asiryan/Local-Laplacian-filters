@@ -1,17 +1,16 @@
 ﻿using LocalLaplacianFilters.Filters;
+using LocalLaplacianFilters.Helpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using UMapx.Imaging;
 
 namespace LocalLaplacianFilters
 {
     public partial class Form4 : Form
     {
         #region Private data
-        ExposureGammaFilter egf = new ExposureGammaFilter();
+        HueSaturationLightnessFilter hsl = new HueSaturationLightnessFilter();
         Bitmap image;
-        Space space;
         #endregion
 
         #region Form voids
@@ -21,31 +20,29 @@ namespace LocalLaplacianFilters
             trackBar1.MouseUp += new MouseEventHandler(trackBar1_MouseUp);
             trackBar2.MouseUp += new MouseEventHandler(trackBar2_MouseUp);
             trackBar3.MouseUp += new MouseEventHandler(trackBar3_MouseUp);
+            trackBar1.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar2.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar3.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar1.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
+            trackBar2.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
+            trackBar3.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
         }
+
         private void Form4_Load(object sender, EventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             pictureBox1.Image = Apply(image);
         }
 
         public Bitmap Apply(Bitmap image)
         {
             // parsing
-            double brightness = double.Parse(textBox1.Text) / 100.0;
-            double exposure = double.Parse(textBox2.Text) / 100.0;
-            double gamma = Math.Pow(2, double.Parse(textBox3.Text) / 100.0);
+            double h = double.Parse(textBox1.Text);
+            double s = double.Parse(textBox2.Text) / 100.0;
+            double l = double.Parse(textBox3.Text) / 100.0;
 
             // applying filter
-            egf.SetParams(brightness, exposure, gamma, space);
-            return egf.Apply(image);
-        }
-
-        public Space Space
-        {
-            set
-            {
-                this.space = value;
-            }
+            hsl.SetParams(h, s, l);
+            return hsl.Apply(image);
         }
 
         public Bitmap Image
@@ -77,12 +74,12 @@ namespace LocalLaplacianFilters
             textBox3.Text = trackBar3.Value.ToString();
         }
 
-        void trackBar3_MouseUp(object sender, MouseEventArgs e)
+        void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                trackBar3.Value = 0;
-                trackBar3_Scroll(sender, e);
+                trackBar1.Value = 0;
+                trackBar1_Scroll(sender, e);
             }
             pictureBox1.Image = Apply(image);
         }
@@ -95,12 +92,12 @@ namespace LocalLaplacianFilters
             }
             pictureBox1.Image = Apply(image);
         }
-        void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        void trackBar3_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                trackBar1.Value = 0;
-                trackBar1_Scroll(sender, e);
+                trackBar3.Value = 0;
+                trackBar3_Scroll(sender, e);
             }
             pictureBox1.Image = Apply(image);
         }

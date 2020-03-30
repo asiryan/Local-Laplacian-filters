@@ -1,4 +1,4 @@
-﻿using LocalLaplacianFilters.Filters;
+﻿using LocalLaplacianFilters.Helpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -17,12 +17,13 @@ namespace LocalLaplacianFilters
         public Form5()
         {
             InitializeComponent();
-            trackBar2.MouseUp += new MouseEventHandler(trackBar2_MouseUp);
+            trackBar1.MouseUp += new MouseEventHandler(trackBar1_MouseUp);
+            trackBar1.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar1.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
         }
 
         private void Form5_Load(object sender, EventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             pictureBox1.Image = Apply(images);
         }
 
@@ -46,30 +47,25 @@ namespace LocalLaplacianFilters
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             this.DialogResult = System.Windows.Forms.DialogResult.OK;
         }
         #endregion
 
         #region TrackBars
-        private void trackBar2_Scroll(object sender, EventArgs e)
+        private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            textBox2.Text = (trackBar2.Value / 100.0 + 0.1).ToString();
+            textBox2.Text = (trackBar1.Value / 100.0 + 0.1).ToString();
         }
 
-        void trackBar2_MouseUp(object sender, MouseEventArgs e)
+        void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                trackBar2.Value = 45;
-                trackBar2_Scroll(sender, e);
+                trackBar1.Value = 45;
+                trackBar1_Scroll(sender, e);
             }
-            pictureBox1.Image = Apply(images);
-        }
-
-        private void ComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
             pictureBox1.Image = Apply(images);
         }
         #endregion

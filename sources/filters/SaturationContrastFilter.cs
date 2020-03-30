@@ -42,7 +42,13 @@ namespace LocalLaplacianFilters.Filters
         public Bitmap Apply(Bitmap image)
         {
             Bitmap clone = (Bitmap)image.Clone();
-            sc.Apply(clone); ce.Apply(clone);
+
+            if (sc.Saturation != 0)
+                sc.Apply(clone);
+
+            if (ce.Contrast != 0)
+                ce.Apply(clone);
+
             return clone;
         }
         #endregion

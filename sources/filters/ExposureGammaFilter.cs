@@ -41,6 +41,7 @@ namespace LocalLaplacianFilters.Filters
 
             this.gc.Gamma = gamma;
             this.gc.Space = space;
+            return;
         }
         /// <summary>
         /// Applies filter to bitmap.
@@ -50,7 +51,16 @@ namespace LocalLaplacianFilters.Filters
         public Bitmap Apply(Bitmap image)
         {
             Bitmap clone = (Bitmap)image.Clone();
-            bc.Apply(clone); sc.Apply(clone); gc.Apply(clone);
+
+            if (this.bc.Brightness != 0)
+                bc.Apply(clone);
+
+            if (this.sc.Offset != 0)
+                sc.Apply(clone);
+
+            if (this.gc.Gamma != 1.0)
+                gc.Apply(clone);
+
             return clone;
         }
         #endregion

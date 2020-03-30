@@ -70,16 +70,22 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UMapx, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Валера\Development\Cryptworks Projects\Crypworks Projects\UMapx.NET Framework 4.0\compile\library_2020\UMapx Framework 4.0\bin\Release\UMapx.dll</HintPath>
+    <Reference Include="UMapx, Version=4.0.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\UMapx.4.0.1.1\lib\net40\UMapx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="controls\histogram.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="filters\BilateralGammaFilter.cs" />
     <Compile Include="filters\ExposureGammaFilter.cs" />
+    <Compile Include="filters\FlipFilter.cs" />
     <Compile Include="filters\GeneralizedLocalLaplacianFilter.cs" />
-    <Compile Include="filters\ImageHelper.cs" />
+    <Compile Include="filters\HueSaturationLightnessFilter.cs" />
+    <Compile Include="helpers\DelegateHelper.cs" />
+    <Compile Include="helpers\ImageHelper.cs" />
+    <Compile Include="filters\TemperatureFilter.cs" />
     <Compile Include="filters\SaturationContrastFilter.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -139,6 +145,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

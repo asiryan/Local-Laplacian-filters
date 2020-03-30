@@ -1,4 +1,5 @@
 ﻿using LocalLaplacianFilters.Filters;
+using LocalLaplacianFilters.Helpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -23,12 +24,23 @@ namespace LocalLaplacianFilters
             trackBar3.MouseUp += new MouseEventHandler(trackBar3_MouseUp);
             trackBar4.MouseUp += new MouseEventHandler(trackBar4_MouseUp);
             trackBar5.MouseUp += new MouseEventHandler(trackBar5_MouseUp);
+            trackBar6.MouseUp += new MouseEventHandler(trackBar6_MouseUp);
+            trackBar1.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar2.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar3.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar4.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar5.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar6.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar1.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
+            trackBar2.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
+            trackBar3.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
+            trackBar4.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
+            trackBar5.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
+            trackBar6.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
         }
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            // culture
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             pictureBox1.Image = Apply(image);
         }
 
@@ -57,9 +69,10 @@ namespace LocalLaplacianFilters
             int discrets = int.Parse(textBox3.Text);
             int levels = int.Parse(textBox4.Text);
             double factor = double.Parse(textBox5.Text);
+            int radius = (int.Parse(textBox6.Text) + 2);
 
             // applying filter
-            gllf.SetParams(lightshadows, sigma, discrets, levels, factor, space);
+            gllf.SetParams(radius, lightshadows, sigma, discrets, levels, factor, space);
             return gllf.Apply(image);
         }
 
@@ -99,7 +112,20 @@ namespace LocalLaplacianFilters
                 textBox5.Text = (v / 10.0).ToString();
             }
         }
+        private void trackBar6_Scroll(object sender, EventArgs e)
+        {
+            textBox6.Text = trackBar6.Value.ToString();
+        }
 
+        void trackBar6_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                trackBar6.Value = 0;
+                trackBar6_Scroll(sender, e);
+            }
+            pictureBox1.Image = Apply(image);
+        }
         void trackBar5_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Right)

@@ -9,9 +9,9 @@ using System.Resources;
 [assembly: AssemblyTitle("Local Laplacian filters")]
 [assembly: AssemblyDescription("Desktop application for local Laplacian image filtering.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Asiryan Valeriy")]
+[assembly: AssemblyCompany("Asiryan Valery")]
 [assembly: AssemblyProduct("Local Laplacian filters")]
-[assembly: AssemblyCopyright("Asiryan Valeriy, © 2020")]
+[assembly: AssemblyCopyright("Asiryan Valery, © 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

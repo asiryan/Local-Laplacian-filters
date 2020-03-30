@@ -1,17 +1,16 @@
 ﻿using LocalLaplacianFilters.Filters;
+using LocalLaplacianFilters.Helpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using UMapx.Imaging;
 
 namespace LocalLaplacianFilters
 {
     public partial class Form3 : Form
     {
         #region Private data
-        SaturationContrastFilter scf = new SaturationContrastFilter();
+        TemperatureFilter temp = new TemperatureFilter();
         Bitmap image;
-        Space space;
         #endregion
 
         #region Form voids
@@ -20,32 +19,26 @@ namespace LocalLaplacianFilters
             InitializeComponent();
             trackBar1.MouseUp += new MouseEventHandler(trackBar1_MouseUp);
             trackBar2.MouseUp += new MouseEventHandler(trackBar2_MouseUp);
+            trackBar1.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar2.MouseWheel += (sender, e) => ((HandledMouseEventArgs)e).Handled = true;
+            trackBar1.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
+            trackBar2.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             pictureBox1.Image = Apply(image);
         }
 
         public Bitmap Apply(Bitmap image)
         {
             // parsing
-            double saturation = int.Parse(textBox1.Text);
-            double contrast = double.Parse(textBox2.Text) / 100.0;
+            double saturation = double.Parse(textBox1.Text);
+            double contrast = double.Parse(textBox2.Text);
 
             // applying
-            scf.SetParams(saturation, contrast, space);
-            return scf.Apply(image);
-        }
-
-        public Space Space
-        {
-            set
-            {
-                this.space = value;
-                trackBar1.Enabled = (this.space != UMapx.Imaging.Space.Grayscale);
-            }
+            temp.SetParams(saturation, contrast);
+            return temp.Apply(image);
         }
 
         public Bitmap Image
@@ -66,11 +59,11 @@ namespace LocalLaplacianFilters
         #region TrackBars
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            textBox1.Text = trackBar1.Value.ToString();
+            textBox1.Text = (trackBar1.Value * 100.0).ToString();
         }
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
-            textBox2.Text = trackBar2.Value.ToString();
+            textBox2.Text = (trackBar2.Value / 100.0).ToString();
         }
 
         void trackBar2_MouseUp(object sender, MouseEventArgs e)

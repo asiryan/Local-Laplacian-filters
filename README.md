@@ -26,7 +26,7 @@ The application is designed for post-processing of raster images by correcting t
 
 ## Enhancement
 <p align="center"><img width="90%" src="docs/examples/enhanced.jpg"/></p>  
-<p align="center"><b>Figure 3.</b> Enhanced</p>   
+<p align="center"><b>Figure 3.</b> Enhanced exposure fusion</p>   
 
 # License
 **GNU GPL v3.0**  

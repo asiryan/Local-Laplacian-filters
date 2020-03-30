@@ -20,10 +20,10 @@ The application is designed for post-processing of raster images by correcting t
 <p align="center"><img width="40%" src="samples/exposure_fusion/lighthouse_1.jpg"/><img width="40%" src="samples/exposure_fusion/lighthouse_2.jpg"/><img width="40%" src="samples/exposure_fusion/lighthouse_3.jpg"/></p>  
 <p align="center"><b>Figure 1.</b> Exposure series</p>  
 
-<p align="center"><img width="40%" src="samples/exposure_fusion/fused.jpg"/></p>  
+<p align="center"><img width="40%" src="docs/examples/exposure_fusion/fused.jpg"/></p>  
 <p align="center"><b>Figure 2.</b> Exposure fusion</p>  
 
-<p align="center"><img width="40%" src="samples/exposure_fusion/enhanced.jpg"/></p>  
+<p align="center"><img width="40%" src="docs/examples/exposure_fusion/enhanced.jpg"/></p>  
 <p align="center"><b>Figure 3.</b> Enhanced</p>   
 
 # License

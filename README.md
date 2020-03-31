@@ -19,7 +19,7 @@ The application is designed for post-processing of raster images by correcting t
 
 ## Exposure Fusion
 <p align="center"><img width="33%" src="samples/exposure_fusion/lighthouse_1.jpg"/><img width="33%" src="samples/exposure_fusion/lighthouse_2.jpg"/><img width="33%" src="samples/exposure_fusion/lighthouse_3.jpg"/></p>  
-<p align="center"><b>Figure 1.</b> Different exposures</p>  
+<p align="center"><b>Figure 1.</b> Images with different exposures</p>  
    
 <p align="center"><img width="99%" src="docs/examples/fused.jpg"/></p>  
 <p align="center"><b>Figure 2.</b> Exposure fusion</p>  

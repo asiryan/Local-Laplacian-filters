@@ -29,7 +29,7 @@ The application is designed for post-processing of raster images by correcting t
 <p align="center"><b>Figure 3.</b> Enhanced exposure fusion</p>   
 
 # License
-**GNU GPL v3.0**  
+**MIT**  
 
 # References
 1. Sylvain Paris, Samuel W. Hasinoff and Jan Kautz. Local Laplacian filters: edge-aware image processing with a Laplacian pyramid, ACM Trans. Graph. 30.4 (2011): 68 ([**pdf**](https://people.csail.mit.edu/sparis/publi/2011/siggraph/Paris_11_Local_Laplacian_Filters_lowres.pdf)).

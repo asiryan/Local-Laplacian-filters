@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LocalLaplacianFilters.controls
+namespace LaplacianHDR.Controls
 {
     /// <summary>
     /// Histogram control.

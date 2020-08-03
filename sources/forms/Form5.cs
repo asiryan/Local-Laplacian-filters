@@ -1,10 +1,10 @@
-﻿using LocalLaplacianFilters.Helpers;
+﻿using LaplacianHDR.Helpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 using UMapx.Imaging;
 
-namespace LocalLaplacianFilters
+namespace LaplacianHDR
 {
     public partial class Form5 : Form
     {
@@ -27,7 +27,7 @@ namespace LocalLaplacianFilters
             pictureBox1.Image = Apply(images);
         }
 
-        public Bitmap Apply(Bitmap[] images)
+        public Bitmap Apply(params Bitmap[] images)
         {
             this.fusion = new ExposureFusion(int.MaxValue, double.Parse(textBox2.Text));
             return this.fusion.Apply(images);
@@ -44,6 +44,10 @@ namespace LocalLaplacianFilters
                 {
                     images[i] = ImageHelper.Crop(value[i], pictureBox1.Width);
                 }
+            }
+            get
+            {
+                return images;
             }
         }
 

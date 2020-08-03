@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.28803.202
+VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalLaplacianFilters", "LocalLaplacianFilters.csproj", "{1382BCE3-78C9-4B6F-884C-C591307595BB}"
 EndProject
@@ -26,6 +26,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {2FBE2719-2EF1-4463-94D3-9F836672DD79}
+		SolutionGuid = {D2006711-5C56-4E77-BD12-E6F2C14FC452}
 	EndGlobalSection
 EndGlobal

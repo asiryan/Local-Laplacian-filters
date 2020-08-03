@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -9,8 +9,8 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LocalLaplacianFilters</RootNamespace>
-    <AssemblyName>Local Laplacian filters</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <AssemblyName>LocalLaplacianFilters</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -25,6 +25,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -35,6 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>llflogo.ico</ApplicationIcon>
@@ -48,6 +50,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
@@ -58,6 +61,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -70,8 +74,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UMapx, Version=4.0.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\UMapx.4.0.1.1\lib\net40\UMapx.dll</HintPath>
+    <Reference Include="UMapx, Version=4.0.2.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\UMapx.4.0.2.2\lib\net40\UMapx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -79,14 +83,13 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="filters\BilateralGammaFilter.cs" />
-    <Compile Include="filters\ExposureGammaFilter.cs" />
     <Compile Include="filters\FlipFilter.cs" />
     <Compile Include="filters\GeneralizedLocalLaplacianFilter.cs" />
     <Compile Include="filters\HueSaturationLightnessFilter.cs" />
     <Compile Include="helpers\DelegateHelper.cs" />
     <Compile Include="helpers\ImageHelper.cs" />
     <Compile Include="filters\TemperatureFilter.cs" />
-    <Compile Include="filters\SaturationContrastFilter.cs" />
+    <Compile Include="filters\SaturationContrastBrightnessFilter.cs" />
     <Compile Include="forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>

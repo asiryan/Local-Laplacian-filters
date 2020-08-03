@@ -1,25 +1,43 @@
-﻿using LocalLaplacianFilters.Filters;
-using LocalLaplacianFilters.Helpers;
+﻿using LaplacianHDR.Filters;
+using LaplacianHDR.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using UMapx.Imaging;
 
-namespace LocalLaplacianFilters
+namespace LaplacianHDR
 {
     public partial class Form1 : Form
     {
+        #region Constants
+        const string application = "Local Laplacian filters";
+        const string formats =
+        "BMP|*.bmp|" +
+        "JPEG|*.jpg; *.jpeg|" +
+        "PNG|*.png|" +
+        "GIF|*.gif|" +
+        "TIFF|*.tiff";
+        const string originals = " Invented by " +
+                "\n Tom Mertens, Jan Kautz, Frank Van Reeth," +
+                "\n Sylvain Paris, Samuel W. Hasinoff, Mathieu Aubry" +
+                "\n 2007-2014 \n" +
+
+                "\n Developed by Valery Asiryan" +
+                "\n 2019-2020 \n" + 
+                
+                "\n Powered by UMapx.NET" +
+                "\n Valery Asiryan" +
+                "\n 2015-2020";
+        #endregion
+
         #region Private data
-        const string text = "Local Laplacian filters";
         Form2 form2 = new Form2();
         Form3 form3 = new Form3();
         Form4 form4 = new Form4();
         Form5 form5 = new Form5();
         OpenFileDialog openFile = new OpenFileDialog();
         SaveFileDialog saveFile = new SaveFileDialog();
-        Bitmap image;
-        Space space;
         Stack<Bitmap> undo = new Stack<Bitmap>();
         Stack<Bitmap> redo = new Stack<Bitmap>();
         string[] file;
@@ -36,7 +54,7 @@ namespace LocalLaplacianFilters
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en-US");
             KeyDown += new KeyEventHandler(Form1_KeyDown);
             KeyPreview = true;
-            Text = text;
+            Text = application;
             Size = new Size(1280, 800);
 
             // owner
@@ -90,14 +108,14 @@ namespace LocalLaplacianFilters
         private void Form1_Load(object sender, EventArgs e)
         {
             // openfile
-            openFile.Filter = "BMP (*.bmp)|*.bmp|JPEG (*.jpg)|*.jpg|PNG (*.png)|*.png|GIF (*.gif)|*.gif|TIFF (*.tiff)|*.tiff";
-            openFile.FilterIndex = 2;
+            openFile.Filter = formats + "|All supported formats|*.bmp; *.jpg; *.jpeg; *.png; *.tiff";
+            openFile.FilterIndex = 6;
             openFile.RestoreDirectory = true;
             openFile.Multiselect = true;
 
             // savefile
-            saveFile.Filter = "BMP (*.bmp)|*.bmp|JPEG (*.jpg)|*.jpg|PNG (*.png)|*.png|GIF (*.gif)|*.gif|TIFF (*.tiff)|*.tiff";
-            saveFile.FilterIndex = 2;
+            saveFile.Filter = formats;
+            saveFile.FilterIndex = 1;
             saveFile.RestoreDirectory = true;
 
             // spaces
@@ -214,14 +232,7 @@ namespace LocalLaplacianFilters
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, " Originals " +
-                "\n Tom Mertens, Jan Kautz, Frank Van Reeth," +
-                "\n Sylvain Paris, Samuel W. Hasinoff, Mathieu Aubry" +
-                "\n 2007-2014 \n" +
-                "\n Developed by Valery Asiryan" +
-                "\n Powered by UMapx.NET" +
-                "\n 2019-2020", 
-                text + ": About",
+            MessageBox.Show(this, originals, application + ": About",
                 MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
@@ -232,48 +243,48 @@ namespace LocalLaplacianFilters
 
         private void enhancementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form2.Image = image;
-            form2.Space = space;
+            form2.Image = Image;
+            form2.Space = Space;
 
             if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Processor(image, form2.Apply);
+                Processor(Image, form2.Apply);
             }
             return;
         }
 
         private void temperatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form3.Image = image;
+            form3.Image = Image;
 
             if (form3.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Processor(image, form3.Apply);
+                Processor(Image, form3.Apply);
             }
             return;
         }
 
         private void hslToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form4.Image = image;
+            form4.Image = Image;
 
             if (form4.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                Processor(image, form4.Apply);
+                Processor(Image, form4.Apply);
             }
             return;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            space = ImageHelper.GetSpace(comboBox1.SelectedIndex);
+            Space = ImageHelper.GetSpace(comboBox1.SelectedIndex);
         }
         #endregion
 
         #region Histogram
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            GetHistogram(image, false);
+            GetHistogram(Image, false);
             return;
         }
 
@@ -295,7 +306,7 @@ namespace LocalLaplacianFilters
         {
             mouse = true;
         }
-        private void histogram1_SelectionChanged(object sender, controls.HistogramEventArgs e)
+        private void histogram1_SelectionChanged(object sender, Controls.HistogramEventArgs e)
         {
             if (mouse)
             {
@@ -331,70 +342,38 @@ namespace LocalLaplacianFilters
                 {
                     // dispose and clear
                     DisposeControls();
-                    ClearStacks();
                     ActivateControls(false);
+                }
+                else if (length == 1)
+                {
+                    // single image
+                    Processor(ImageHelper.Open(filenames[0]), null, false);
+                    file = new string[] { filenames[0] };
+                    Text = application + ": " + System.IO.Path.GetFileName(file[0]);
+                    ActivateControls(true);
                 }
                 else
                 {
-                    // collect input data
-                    List<Bitmap> images = new List<Bitmap>();
-                    Bitmap current = new Bitmap(filenames[0]);
-                    int width = current.Width;
-                    int height = current.Height;
-                    images.Add(current);
-
-                    // do job
-                    for (int i = 1; i < length; i++)
-                    {
-                        current = new Bitmap(filenames[i]);
-                        if (current.Width != width ||
-                            current.Height != height)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            images.Add(current);
-                        }
-                    }
-
-                    // get images array
-                    Bitmap[] array = images.ToArray();
-                    length = array.Length;
-
                     // exposure fusion
-                    if (length > 1)
-                    {
-                        form5.Images = array;
-                        this.BringToFront();
+                    Bitmap[] array = ImageHelper.Open(filenames);
+                    form5.Images = array;
+                    this.BringToFront();
 
-                        if (form5.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                        {
-                            Processor(array, form5.Apply);
-                            file = filenames;
-                            Text = text + ": exposure fusion (" + file.Length + " images)";
-                            ActivateControls(true);
-                        }
-                    }
-                    // single image
-                    else
+                    if (form5.ShowDialog() == DialogResult.OK)
                     {
-                        Processor((Bitmap)Bitmap.FromFile(filenames[0]), null, false);
-                        file = new string[] { filenames[0] };
-                        Text = text + ": " + System.IO.Path.GetFileName(file[0]);
+                        Processor(array, form5.Apply);
+                        file = filenames;
+                        Text = application + ": exposure fusion (" + file.Length + " images)";
                         ActivateControls(true);
                     }
-
-                    // clear data
-                    ClearStacks();
-                    images.Clear();
-                    images = null;
-                    array = null;
                 }
+
+                // clear data
+                ClearStacks();
             }
-            catch
+            catch (Exception exception)
             {
-                MessageBox.Show("Incorrect input image data", text + ": Error", MessageBoxButtons.OK,
+                MessageBox.Show(exception.Message, application + ": Error", MessageBoxButtons.OK,
                             MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
             return;
@@ -405,13 +384,13 @@ namespace LocalLaplacianFilters
             // try to save
             try
             {
-                image.Save(filename, ImageHelper.GetImageFormat(index));
+                ImageHelper.Save(Image, filename, ImageHelper.GetImageFormat(index));
                 file = new string[] { filename };
-                Text = text + ": " + System.IO.Path.GetFileName(filename);
+                Text = application + ": " + System.IO.Path.GetFileName(filename);
             }
-            catch
+            catch (Exception exception)
             {
-                MessageBox.Show("Incorrect output image data", text + ": Error", MessageBoxButtons.OK,
+                MessageBox.Show(exception.Message, application + ": Error", MessageBoxButtons.OK,
                             MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
             return;
@@ -503,8 +482,8 @@ namespace LocalLaplacianFilters
         private void DisposeControls()
         {
             file = null;
-            image = null;
-            Text = text;
+            Image = null;
+            Text = application;
             label4.Text = null;
             label8.Text = null;
             pictureBox1.Image = null;
@@ -536,7 +515,7 @@ namespace LocalLaplacianFilters
                 textBox4.Text =
                 textBox5.Text = "0";
 
-            pictureBox1.Image = image;
+            pictureBox1.Image = Image;
             return;
         }
 
@@ -551,16 +530,16 @@ namespace LocalLaplacianFilters
                 if (cache)
                 {
                     undoToolStripMenuItem.Enabled = true;
-                    undo.Push(image);
+                    undo.Push(Image);
                     redo.Clear();
                 }
                 // apply filter or not?
-                image = (filter != null) ? filter(bitmap) : bitmap;
+                Image = (filter != null) ? filter(bitmap) : bitmap;
 
                 // settings
-                GetHistogram(image);
+                GetHistogram(Image);
                 ResetAdjustments();
-                pictureBox1.Image = image;
+                pictureBox1.Image = Image;
                 Cursor = Cursors.Arrow;
             }
             return;
@@ -572,10 +551,10 @@ namespace LocalLaplacianFilters
             if (bitmap != null)
             {
                 Cursor = Cursors.WaitCursor;
-                image = (filter != null) ? filter(bitmap) : null; // not implemented
-                GetHistogram(image);
+                Image = (filter != null) ? filter(bitmap) : null; // not implemented
+                GetHistogram(Image);
                 ResetAdjustments();
-                pictureBox1.Image = image;
+                pictureBox1.Image = Image;
                 Cursor = Cursors.Arrow;
             }
             return;
@@ -583,9 +562,9 @@ namespace LocalLaplacianFilters
         #endregion
 
         #region Adjustments
-        SaturationContrastFilter scf = new SaturationContrastFilter();
-        ExposureGammaFilter egf = new ExposureGammaFilter();
-
+        SaturationContrastBrightnessFilter scf = new SaturationContrastBrightnessFilter();
+        public Bitmap Image { get; set; }
+        public Space Space { get; set; }
         public Bitmap Apply(Bitmap image)
         {
             // parsing
@@ -596,11 +575,10 @@ namespace LocalLaplacianFilters
             double gamma = Math.Pow(2, -3 * double.Parse(textBox3.Text) / 100.0);
 
             // parameters
-            scf.SetParams(saturation, contrast, space);
-            egf.SetParams(brightness, exposure, gamma, space);
+            scf.SetParams(saturation, contrast, brightness, exposure, gamma, Space);
 
             // applying filter
-            Bitmap filter = egf.Apply(scf.Apply(image));
+            Bitmap filter = scf.Apply(image);
             GetHistogram(filter);
             return filter;
         }
@@ -612,7 +590,7 @@ namespace LocalLaplacianFilters
                 trackBar1.Value = 0;
                 trackBar1_Scroll(sender, e);
             }
-            pictureBox1.Image = Apply(image);
+            pictureBox1.Image = Apply(Image);
         }
         void trackBar2_MouseUp(object sender, MouseEventArgs e)
         {
@@ -621,7 +599,7 @@ namespace LocalLaplacianFilters
                 trackBar2.Value = 0;
                 trackBar2_Scroll(sender, e);
             }
-            pictureBox1.Image = Apply(image);
+            pictureBox1.Image = Apply(Image);
         }
         void trackBar3_MouseUp(object sender, MouseEventArgs e)
         {
@@ -630,7 +608,7 @@ namespace LocalLaplacianFilters
                 trackBar3.Value = 0;
                 trackBar3_Scroll(sender, e);
             }
-            pictureBox1.Image = Apply(image);
+            pictureBox1.Image = Apply(Image);
         }
         void trackBar4_MouseUp(object sender, MouseEventArgs e)
         {
@@ -639,7 +617,7 @@ namespace LocalLaplacianFilters
                 trackBar4.Value = 0;
                 trackBar4_Scroll(sender, e);
             }
-            pictureBox1.Image = Apply(image);
+            pictureBox1.Image = Apply(Image);
         }
         void trackBar5_MouseUp(object sender, MouseEventArgs e)
         {
@@ -648,7 +626,7 @@ namespace LocalLaplacianFilters
                 trackBar5.Value = 0;
                 trackBar5_Scroll(sender, e);
             }
-            pictureBox1.Image = Apply(image);
+            pictureBox1.Image = Apply(Image);
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -691,12 +669,12 @@ namespace LocalLaplacianFilters
         {
             if (undoToolStripMenuItem.Enabled && undo.Count > 0)
             {
-                redo.Push(image);
-                image = undo.Pop();
+                redo.Push(Image);
+                Image = undo.Pop();
                 redoToolStripMenuItem.Enabled = redo.Count > 0;
                 undoToolStripMenuItem.Enabled = undo.Count > 0;
-                GetHistogram(image);
-                pictureBox1.Image = image;
+                GetHistogram(Image);
+                pictureBox1.Image = Image;
             }
             return;
         }
@@ -704,12 +682,12 @@ namespace LocalLaplacianFilters
         {
             if (redoToolStripMenuItem.Enabled && redo.Count > 0)
             {
-                undo.Push(image);
-                image = redo.Pop();
+                undo.Push(Image);
+                Image = redo.Pop();
                 redoToolStripMenuItem.Enabled = redo.Count > 0;
                 undoToolStripMenuItem.Enabled = undo.Count > 0;
-                GetHistogram(image);
-                pictureBox1.Image = image;
+                GetHistogram(Image);
+                pictureBox1.Image = Image;
             }
             return;
         }
@@ -717,12 +695,12 @@ namespace LocalLaplacianFilters
         private void flipVerticalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             flip.SetParams(false, true);
-            Processor(image, flip.Apply);
+            Processor(Image, flip.Apply);
         }
         private void flipHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             flip.SetParams(true, false);
-            Processor(image, flip.Apply);
+            Processor(Image, flip.Apply);
         }
         #endregion
     }

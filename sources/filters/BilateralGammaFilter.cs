@@ -1,7 +1,7 @@
 ﻿using System;
 using UMapx.Imaging;
 
-namespace LocalLaplacianFilters.Filters
+namespace LaplacianHDR.Filters
 {
     /// <summary>
     /// Defines bilateral gamma correction filter.

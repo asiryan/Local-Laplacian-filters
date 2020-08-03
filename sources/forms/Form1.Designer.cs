@@ -1,4 +1,4 @@
-﻿namespace LocalLaplacianFilters
+﻿namespace LaplacianHDR
 {
     partial class Form1
     {
@@ -80,10 +80,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.histogram1 = new LocalLaplacianFilters.controls.Histogram();
-            this.histogram2 = new LocalLaplacianFilters.controls.Histogram();
-            this.histogram3 = new LocalLaplacianFilters.controls.Histogram();
-            this.histogram4 = new LocalLaplacianFilters.controls.Histogram();
+            this.histogram1 = new LaplacianHDR.Controls.Histogram();
+            this.histogram2 = new LaplacianHDR.Controls.Histogram();
+            this.histogram3 = new LaplacianHDR.Controls.Histogram();
+            this.histogram4 = new LaplacianHDR.Controls.Histogram();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -797,10 +797,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Panel panel1;
-        private controls.Histogram histogram1;
-        private controls.Histogram histogram2;
-        private controls.Histogram histogram3;
-        private controls.Histogram histogram4;
+        private Controls.Histogram histogram1;
+        private Controls.Histogram histogram2;
+        private Controls.Histogram histogram3;
+        private Controls.Histogram histogram4;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox checkBox1;

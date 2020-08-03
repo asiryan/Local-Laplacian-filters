@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using UMapx.Imaging;
 
-namespace LocalLaplacianFilters.Filters
+namespace LaplacianHDR.Filters
 {
     /// <summary>
     /// Defines flip filter.

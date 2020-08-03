@@ -1,4 +1,4 @@
-﻿namespace LocalLaplacianFilters
+﻿namespace LaplacianHDR
 {
     partial class Form3
     {

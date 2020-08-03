@@ -1,10 +1,10 @@
-﻿using LocalLaplacianFilters.Filters;
-using LocalLaplacianFilters.Helpers;
+﻿using LaplacianHDR.Filters;
+using LaplacianHDR.Helpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace LocalLaplacianFilters
+namespace LaplacianHDR
 {
     public partial class Form4 : Form
     {
@@ -51,6 +51,10 @@ namespace LocalLaplacianFilters
             {
                 image = ImageHelper.Crop(value, pictureBox1.Width);
                 pictureBox1.Image = image;
+            }
+            get
+            {
+                return image;
             }
         }
 

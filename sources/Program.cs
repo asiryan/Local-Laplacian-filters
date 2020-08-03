@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Threading;
 using System.Windows.Forms;
 
-namespace LocalLaplacianFilters
+namespace LaplacianHDR
 {
     static class Program
     {

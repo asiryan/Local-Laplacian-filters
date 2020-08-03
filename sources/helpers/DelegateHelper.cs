@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace LocalLaplacianFilters.Helpers
+namespace LaplacianHDR.Helpers
 {
     #region Delegates
     /// <summary>

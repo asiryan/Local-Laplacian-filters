@@ -1,11 +1,11 @@
-﻿using LocalLaplacianFilters.Filters;
-using LocalLaplacianFilters.Helpers;
+﻿using LaplacianHDR.Filters;
+using LaplacianHDR.Helpers;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
 using UMapx.Imaging;
 
-namespace LocalLaplacianFilters
+namespace LaplacianHDR
 {
     public partial class Form2 : Form
     {
@@ -51,13 +51,21 @@ namespace LocalLaplacianFilters
                 image = ImageHelper.Crop(value, pictureBox1.Width);
                 pictureBox1.Image = image;
             }
+            get
+            {
+                return image;
+            }
         }
 
         public Space Space
         {
             set
             {
-                this.space = value;
+                space = value;
+            }
+            get
+            {
+                return space;
             }
         }
 
@@ -69,7 +77,7 @@ namespace LocalLaplacianFilters
             int discrets = int.Parse(textBox3.Text);
             int levels = int.Parse(textBox4.Text);
             double factor = double.Parse(textBox5.Text);
-            int radius = (int.Parse(textBox6.Text) + 2);
+            int radius = 2 * (int.Parse(textBox6.Text) + 1);
 
             // applying filter
             gllf.SetParams(radius, lightshadows, sigma, discrets, levels, factor, space);

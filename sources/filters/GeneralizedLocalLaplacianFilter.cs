@@ -2,7 +2,7 @@
 using UMapx.Imaging;
 using UMapx.Transform;
 
-namespace LocalLaplacianFilters.Filters
+namespace LaplacianHDR.Filters
 {
     /// <summary>
     /// Defines generalized local Laplacian filter.

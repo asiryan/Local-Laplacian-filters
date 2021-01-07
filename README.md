@@ -10,10 +10,6 @@ Desktop application for local Laplacian image filtering developed in C#.
 **RAM:** 2 GB or more of RAM  
 **Minimal resolution:** 1280 x 800 px  
 
-## Dependencies
-Download and move [**UMapx.dll**](https://github.com/asiryan/UMapx.NET/tree/master/release) to the root [**folder**](https://github.com/asiryan/Local-Laplacian-filters/tree/master/app) of the application.  
-  
-
 # Application
 The application is designed for post-processing of raster images by correcting the dynamic range of brightness, local and global contrast, detail, saturation and exposure. It supports three color spaces: **YCbCr, HSL, HSB** and **grayscale** mode. The application includes the function of creating **HDR**-images from a series of images of different exposures (exposure fusion based on Laplacian pyramid technique [3]).  
 

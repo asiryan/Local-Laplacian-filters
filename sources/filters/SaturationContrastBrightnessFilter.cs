@@ -37,7 +37,7 @@ namespace LaplacianHDR.Filters
         /// <param name="exposure">Exposure</param>
         /// <param name="gamma">Gamma</param>
         /// <param name="space">Colorspace</param>
-        public void SetParams(double saturation, double contrast, double brightness, double exposure, double gamma, Space space)
+        public void SetParams(float saturation, float contrast, float brightness, float exposure, float gamma, Space space)
         {
             this.sc.Saturation = saturation;
 

@@ -35,7 +35,7 @@ namespace LaplacianHDR.Filters
         /// <param name="levels">Number of levels</param>
         /// <param name="factor">Factor</param>
         /// <param name="space">Colorspace</param>
-        public void SetParams(int radius, double lightshadows, double sigma, int discrets, int levels, double factor, Space space)
+        public void SetParams(int radius, float lightshadows, float sigma, int discrets, int levels, float factor, Space space)
         {
             this.bgc.Value = lightshadows;
             this.bgc.Space = space;

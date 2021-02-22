@@ -36,9 +36,9 @@ namespace LaplacianHDR
         public Bitmap Apply(Bitmap image)
         {
             // parsing
-            double h = double.Parse(textBox1.Text);
-            double s = double.Parse(textBox2.Text) / 100.0;
-            double l = double.Parse(textBox3.Text) / 100.0;
+            float h = float.Parse(textBox1.Text);
+            float s = float.Parse(textBox2.Text) / 100.0f;
+            float l = float.Parse(textBox3.Text) / 100.0f;
 
             // applying filter
             hsl.SetParams(h, s, l);

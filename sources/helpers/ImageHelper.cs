@@ -145,7 +145,7 @@ namespace LaplacianHDR.Helpers
             double k = min / (double)box;
 
             return (new Bitmap(bitmap, (int)(width / k + 1), (int)(height / k + 1))).
-                Clone(new Rectangle(0, 0, box, box), System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+                Clone(new Rectangle(0, 0, box, box), PixelFormat.Format32bppArgb);
         }
         /// <summary>
         /// Checks if bitmaps in array have the same sizes.

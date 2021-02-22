@@ -72,11 +72,11 @@ namespace LaplacianHDR
         public Bitmap Apply(Bitmap image)
         {
             // parsing
-            double lightshadows = Math.Pow(2, double.Parse(textBox1.Text) / 100.0);
-            double sigma = double.Parse(textBox2.Text);
+            float lightshadows = (float)Math.Pow(2, float.Parse(textBox1.Text) / 100.0);
+            float sigma = float.Parse(textBox2.Text);
             int discrets = int.Parse(textBox3.Text);
             int levels = int.Parse(textBox4.Text);
-            double factor = double.Parse(textBox5.Text);
+            float factor = float.Parse(textBox5.Text);
             int radius = 2 * (int.Parse(textBox6.Text) + 1);
 
             // applying filter

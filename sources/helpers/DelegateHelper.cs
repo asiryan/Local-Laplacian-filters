@@ -8,12 +8,12 @@ namespace LaplacianHDR.Helpers
     /// </summary>
     /// <param name="bitmap">Bitmap</param>
     /// <returns>Bitmap</returns>
-    public delegate Bitmap SingleFilter(Bitmap bitmap);
+    public delegate Bitmap Filter(Bitmap bitmap);
     /// <summary>
     /// Filter delegate.
     /// </summary>
     /// <param name="bitmap">Bitmap</param>
     /// <returns>Bitmap</returns>
-    public delegate Bitmap ComplexFilter(Bitmap[] bitmap);
+    public delegate Bitmap MultiFilter(Bitmap[] bitmap);
     #endregion
 }

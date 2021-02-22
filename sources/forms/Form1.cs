@@ -519,7 +519,7 @@ namespace LaplacianHDR
             return;
         }
 
-        private void Processor(Bitmap bitmap, SingleFilter filter, bool cache = true)
+        private void Processor(Bitmap bitmap, Filter filter, bool cache = true)
         {
             // check if null
             if (bitmap != null)
@@ -545,7 +545,7 @@ namespace LaplacianHDR
             return;
         }
 
-        private void Processor(Bitmap[] bitmap, ComplexFilter filter)
+        private void Processor(Bitmap[] bitmap, MultiFilter filter)
         {
             // check if null
             if (bitmap != null)
@@ -568,11 +568,11 @@ namespace LaplacianHDR
         public Bitmap Apply(Bitmap image)
         {
             // parsing
-            double saturation = int.Parse(textBox1.Text);
-            double contrast = double.Parse(textBox2.Text) / 100.0;
-            double brightness = double.Parse(textBox5.Text) / 100.0;
-            double exposure = double.Parse(textBox4.Text) / 100.0;
-            double gamma = Math.Pow(2, -3 * double.Parse(textBox3.Text) / 100.0);
+            float saturation = int.Parse(textBox1.Text);
+            float contrast = float.Parse(textBox2.Text) / 100.0f;
+            float brightness = float.Parse(textBox5.Text) / 100.0f;
+            float exposure = float.Parse(textBox4.Text) / 100.0f;
+            float gamma = (float)Math.Pow(2, -3 * float.Parse(textBox3.Text) / 100.0f);
 
             // parameters
             scf.SetParams(saturation, contrast, brightness, exposure, gamma, Space);

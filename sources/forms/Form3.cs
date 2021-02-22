@@ -33,8 +33,8 @@ namespace LaplacianHDR
         public Bitmap Apply(Bitmap image)
         {
             // parsing
-            double saturation = double.Parse(textBox1.Text);
-            double contrast = double.Parse(textBox2.Text);
+            float saturation = float.Parse(textBox1.Text);
+            float contrast = float.Parse(textBox2.Text);
 
             // applying
             temp.SetParams(saturation, contrast);

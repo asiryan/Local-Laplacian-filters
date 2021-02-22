@@ -26,7 +26,7 @@ namespace LaplacianHDR.Filters
         /// <param name="h">Hue</param>
         /// <param name="s">Saturation</param>
         /// <param name="l">Lightness</param>
-        public void SetParams(double h, double s, double l)
+        public void SetParams(float h, float s, float l)
         {
             this.hsl.Hue = h;
             this.hsl.Saturation = s;

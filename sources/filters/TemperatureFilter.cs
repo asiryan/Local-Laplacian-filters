@@ -25,7 +25,7 @@ namespace LaplacianHDR.Filters
         /// </summary>
         /// <param name="temperature">Temperature</param>
         /// <param name="strenght">Strength</param>
-        public void SetParams(double temperature, double strenght)
+        public void SetParams(float temperature, float strenght)
         {
             this.temp.Temperature = temperature;
             this.temp.Strength = strenght;

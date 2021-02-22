@@ -9,7 +9,7 @@ namespace LaplacianHDR.Filters
     public class BilateralGammaCorrection : Correction
     {
         #region Private data
-        private double g;
+        private float g;
         #endregion
 
         #region Filter components
@@ -18,14 +18,14 @@ namespace LaplacianHDR.Filters
         /// </summary>
         /// <param name="g">Gamma</param>
         /// <param name="space">Space</param>
-        public BilateralGammaCorrection(double g, Space space)
+        public BilateralGammaCorrection(float g, Space space)
         {
             Value = g; Space = space;
         }
         /// <summary>
         /// Gets or sets gamma value.
         /// </summary>
-        public double Value
+        public float Value
         {
             get
             {
@@ -53,13 +53,13 @@ namespace LaplacianHDR.Filters
         /// <param name="g">Gamma</param>
         /// <param name="length">Length</param>
         /// <returns>Array</returns>
-        public static double[] Gamma(double g, int length)
+        public static float[] Gamma(float g, int length)
         {
-            double[] table = new double[length];
+            float[] table = new float[length];
 
             for (int x = 0; x < length; x++)
             {
-                table[x] = Gamma(x / (double)length, g);
+                table[x] = Gamma(x / (float)length, g);
             }
             return table;
         }
@@ -69,7 +69,7 @@ namespace LaplacianHDR.Filters
         /// <param name="x">Argument</param>
         /// <param name="g">Gamma</param>
         /// <returns>Double</returns>
-        public static double Gamma(double x, double g)
+        public static float Gamma(float x, float g)
         {
             double y, z, w;
 
@@ -90,9 +90,9 @@ namespace LaplacianHDR.Filters
 
             // check
             if (double.IsNaN(y))
-                return 1.0;
+                return 1.0f;
 
-            return y;
+            return (float)y;
         }
         #endregion
     }

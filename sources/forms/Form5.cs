@@ -29,7 +29,7 @@ namespace LaplacianHDR
 
         public Bitmap Apply(params Bitmap[] images)
         {
-            this.fusion = new ExposureFusion(int.MaxValue, double.Parse(textBox2.Text));
+            this.fusion = new ExposureFusion(int.MaxValue, float.Parse(textBox2.Text));
             return this.fusion.Apply(images);
         }
 

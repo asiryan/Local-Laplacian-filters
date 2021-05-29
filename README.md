@@ -1,5 +1,5 @@
 <p align="center"><img width="70%" src="docs/llf_main.png" /></p>
-<p align="center"> Desktop application for local Laplacian image filtering developed in C# </p>   
+<p align="center"> Desktop application for <b>local Laplacian image filtering</b> developed in C# </p>   
 
 # Installation
 ## System requirements

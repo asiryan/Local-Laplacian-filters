@@ -100,11 +100,11 @@
     <Compile Include="forms\MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\Form2.cs">
+    <Compile Include="forms\EnhancementDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="forms\EnhancementDetailsWindow.Designer.cs">
+      <DependentUpon>EnhancementDetailsWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\Form3.cs">
       <SubType>Form</SubType>
@@ -129,8 +129,8 @@
     <EmbeddedResource Include="forms\MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="forms\EnhancementDetailsWindow.resx">
+      <DependentUpon>EnhancementDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Form3.resx">
       <DependentUpon>Form3.cs</DependentUpon>

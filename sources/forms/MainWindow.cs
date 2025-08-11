@@ -35,10 +35,10 @@ namespace LaplacianHDR
 
         #region Private data
 
-        private readonly EnhancementDetailsWindow form2 = new EnhancementDetailsWindow();
-        private readonly TemeratureWindow form3 = new TemeratureWindow();
-        private readonly Form4 form4 = new Form4();
-        private readonly Form5 form5 = new Form5();
+        private readonly EnhancementDetailsWindow enhancementDetailsWindow = new EnhancementDetailsWindow();
+        private readonly TemeratureWindow temeratureWindow = new TemeratureWindow();
+        private readonly HueSaturationLightnessWindow hueSaturationLightnessWindow = new HueSaturationLightnessWindow();
+        private readonly ExposureFusionWindow exposureFusionWindow = new ExposureFusionWindow();
         private readonly OpenFileDialog openFile = new OpenFileDialog();
         private readonly SaveFileDialog saveFile = new SaveFileDialog();
         private readonly Stack<Bitmap> undo = new Stack<Bitmap>();
@@ -63,11 +63,11 @@ namespace LaplacianHDR
             Size = new Size(1280, 800);
 
             // owner
-            form2.Owner = this;
-            form3.Owner = this;
-            form4.Owner = this;
-            form5.Owner = this;
-            form5.TopMost = true;
+            enhancementDetailsWindow.Owner = this;
+            temeratureWindow.Owner = this;
+            hueSaturationLightnessWindow.Owner = this;
+            exposureFusionWindow.Owner = this;
+            exposureFusionWindow.TopMost = true;
 
             // elements
             pictureBox1.AllowDrop = true;
@@ -238,32 +238,32 @@ namespace LaplacianHDR
 
         private void enhancementToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form2.Image = Image;
-            form2.Space = Space;
+            enhancementDetailsWindow.Image = Image;
+            enhancementDetailsWindow.Space = Space;
 
-            if (form2.ShowDialog() == DialogResult.OK)
+            if (enhancementDetailsWindow.ShowDialog() == DialogResult.OK)
             {
-                Processor(Image, form2.Apply);
+                Processor(Image, enhancementDetailsWindow.Apply);
             }
         }
 
         private void temperatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form3.Image = Image;
+            temeratureWindow.Image = Image;
 
-            if (form3.ShowDialog() == DialogResult.OK)
+            if (temeratureWindow.ShowDialog() == DialogResult.OK)
             {
-                Processor(Image, form3.Apply);
+                Processor(Image, temeratureWindow.Apply);
             }
         }
 
         private void hslToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form4.Image = Image;
+            hueSaturationLightnessWindow.Image = Image;
 
-            if (form4.ShowDialog() == DialogResult.OK)
+            if (hueSaturationLightnessWindow.ShowDialog() == DialogResult.OK)
             {
-                Processor(Image, form4.Apply);
+                Processor(Image, hueSaturationLightnessWindow.Apply);
             }
         }
 
@@ -353,12 +353,12 @@ namespace LaplacianHDR
                 {
                     // exposure fusion
                     Bitmap[] array = ImageHelper.Open(filenames);
-                    form5.Images = array;
+                    exposureFusionWindow.Images = array;
                     this.BringToFront();
 
-                    if (form5.ShowDialog() == DialogResult.OK)
+                    if (exposureFusionWindow.ShowDialog() == DialogResult.OK)
                     {
-                        Processor(array, form5.Apply);
+                        Processor(array, exposureFusionWindow.Apply);
                         file = filenames;
                         Text = application + ": exposure fusion (" + file.Length + " images)";
                         ActivateControls(true);
@@ -714,17 +714,17 @@ namespace LaplacianHDR
 
             saveFile.Dispose();
 
-            form2.Close();
-            form2.Dispose();
+            enhancementDetailsWindow.Close();
+            enhancementDetailsWindow.Dispose();
 
-            form3.Close();
-            form3.Dispose();
+            temeratureWindow.Close();
+            temeratureWindow.Dispose();
 
-            form4.Close();
-            form4.Dispose();
+            hueSaturationLightnessWindow.Close();
+            hueSaturationLightnessWindow.Dispose();
 
-            form5.Close();
-            form5.Dispose();
+            exposureFusionWindow.Close();
+            exposureFusionWindow.Dispose();
         }
 
         private void DisposeHistograms()
@@ -737,10 +737,10 @@ namespace LaplacianHDR
 
         private void DisposeStacks()
         {
-            undo.DisposeStack();
+            undo.Dispose();
             undo.Clear();
 
-            redo.DisposeStack();
+            redo.Dispose();
             redo.Clear();
         }
 

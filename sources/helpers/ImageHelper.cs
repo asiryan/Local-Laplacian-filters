@@ -14,14 +14,14 @@ namespace LaplacianHDR.Helpers
     {
         #region Static voids
         /// <summary>
-        /// Disposes a stack of images.
+        /// Disposes an array of IDisposable.
         /// </summary>
-        /// <param name="stack">Stack</param>
-        public static void DisposeStack(this Stack<Bitmap> stack)
+        /// <param name="array">Array</param>
+        public static void Dispose(this IEnumerable<IDisposable> array)
         {
-            foreach (var bitmap in stack)
+            foreach (var a in array)
             {
-                bitmap.Dispose();
+                a.Dispose();
             }
         }
         /// <summary>

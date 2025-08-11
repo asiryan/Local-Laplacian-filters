@@ -6,15 +6,17 @@ using UMapx.Imaging;
 
 namespace LaplacianHDR
 {
-    public partial class Form5 : Form
+    public partial class ExposureFusionWindow : Form
     {
         #region Private data
+
         ExposureFusion fusion;
         Bitmap[] images;
+
         #endregion
 
         #region Form voids
-        public Form5()
+        public ExposureFusionWindow()
         {
             InitializeComponent();
             trackBar1.MouseUp += new MouseEventHandler(trackBar1_MouseUp);
@@ -24,13 +26,19 @@ namespace LaplacianHDR
 
         private void Form5_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Apply(images);
+            UpdatePictureBox(Apply(images));
         }
 
         public Bitmap Apply(params Bitmap[] images)
         {
             this.fusion = new ExposureFusion(int.MaxValue, float.Parse(textBox2.Text));
             return this.fusion.Apply(images);
+        }
+
+        private void UpdatePictureBox(Bitmap image)
+        {
+            pictureBox1.Image?.Dispose();
+            pictureBox1.Image = image;
         }
 
         public Bitmap[] Images
@@ -53,11 +61,12 @@ namespace LaplacianHDR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
         }
         #endregion
 
         #region TrackBars
+
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             textBox2.Text = (trackBar1.Value / 100.0 + 0.1).ToString();
@@ -65,13 +74,26 @@ namespace LaplacianHDR
 
         void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 trackBar1.Value = 45;
                 trackBar1_Scroll(sender, e);
             }
-            pictureBox1.Image = Apply(images);
+            UpdatePictureBox(Apply(images));
         }
+
+        #endregion
+
+        #region Dispose
+
+        public new void Dispose()
+        {
+            images?.Dispose();
+            pictureBox1.Dispose();
+            trackBar1.Dispose();
+            base.Dispose();
+        }
+
         #endregion
     }
 }

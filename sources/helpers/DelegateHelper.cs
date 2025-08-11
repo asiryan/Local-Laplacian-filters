@@ -2,7 +2,6 @@
 
 namespace LaplacianHDR.Helpers
 {
-    #region Delegates
     /// <summary>
     /// Filter delegate.
     /// </summary>
@@ -15,5 +14,4 @@ namespace LaplacianHDR.Helpers
     /// <param name="bitmap">Bitmap</param>
     /// <returns>Bitmap</returns>
     public delegate Bitmap MultiFilter(Bitmap[] bitmap);
-    #endregion
 }

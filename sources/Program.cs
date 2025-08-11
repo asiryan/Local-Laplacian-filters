@@ -17,7 +17,7 @@ namespace LaplacianHDR
             Application.SetCompatibleTextRenderingDefault(false);
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InvariantCulture;
-            Application.Run(new Form1());
+            Application.Run(new MainWindow());
         }
     }
 }

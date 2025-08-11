@@ -9,7 +9,7 @@ namespace LaplacianHDR.Filters
     public class HueSaturationLightnessFilter
     {
         #region Private data
-        private HSLFilter hsl;
+        private readonly HSLFilter hsl;
         #endregion
 
         #region Filter components

@@ -417,7 +417,8 @@ namespace LaplacianHDR.Controls
     /// </summary>
     public class HistogramEventArgs : EventArgs
     {
-        private int min, max;
+        private readonly int min;
+        private readonly int max;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HistogramEventArgs"/> class.

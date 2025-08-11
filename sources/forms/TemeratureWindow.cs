@@ -6,15 +6,18 @@ using System.Windows.Forms;
 
 namespace LaplacianHDR
 {
-    public partial class Form3 : Form
+    public partial class TemeratureWindow : Form
     {
         #region Private data
-        TemperatureFilter temp = new TemperatureFilter();
-        Bitmap image;
+
+        private readonly TemperatureFilter temp = new TemperatureFilter();
+        private Bitmap image;
+
         #endregion
 
         #region Form voids
-        public Form3()
+
+        public TemeratureWindow()
         {
             InitializeComponent();
             trackBar1.MouseUp += new MouseEventHandler(trackBar1_MouseUp);
@@ -27,7 +30,13 @@ namespace LaplacianHDR
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Apply(image);
+            UpdatePictureBox(Apply(image));
+        }
+
+        private void UpdatePictureBox(Bitmap image)
+        {
+            pictureBox1.Image?.Dispose();
+            pictureBox1.Image = image;
         }
 
         public Bitmap Apply(Bitmap image)
@@ -45,8 +54,8 @@ namespace LaplacianHDR
         {
             set
             {
+                image?.Dispose();
                 image = ImageHelper.Crop(value, pictureBox1.Width);
-                pictureBox1.Image = image;
             }
             get
             {
@@ -56,15 +65,18 @@ namespace LaplacianHDR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.DialogResult = DialogResult.OK;
         }
+
         #endregion
 
         #region TrackBars
+
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
             textBox1.Text = (trackBar1.Value * 100.0).ToString();
         }
+
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             textBox2.Text = (trackBar2.Value / 100.0).ToString();
@@ -72,22 +84,37 @@ namespace LaplacianHDR
 
         void trackBar2_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 trackBar2.Value = 0;
                 trackBar2_Scroll(sender, e);
             }
-            pictureBox1.Image = Apply(image);
+            UpdatePictureBox(Apply(image));
         }
+
         void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 trackBar1.Value = 0;
                 trackBar1_Scroll(sender, e);
             }
-            pictureBox1.Image = Apply(image);
+            UpdatePictureBox(Apply(image));
         }
+
+        #endregion
+
+        #region Dispose
+
+        public new void Dispose()
+        {
+            image?.Dispose();
+            pictureBox1.Dispose();
+            trackBar1.Dispose();
+            trackBar2.Dispose();
+            base.Dispose();
+        }
+
         #endregion
     }
 }

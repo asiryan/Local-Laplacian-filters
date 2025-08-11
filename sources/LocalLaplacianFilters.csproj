@@ -67,8 +67,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.8.0.0\lib\net462\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -78,8 +78,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UMapx, Version=5.1.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\UMapx.5.1.0.2\lib\netstandard2.0\UMapx.dll</HintPath>
+    <Reference Include="UMapx, Version=5.2.9.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\UMapx.5.2.9.6\lib\netstandard2.0\UMapx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -94,52 +94,52 @@
     <Compile Include="helpers\ImageHelper.cs" />
     <Compile Include="filters\TemperatureFilter.cs" />
     <Compile Include="filters\SaturationContrastBrightnessFilter.cs" />
-    <Compile Include="forms\Form1.cs">
+    <Compile Include="forms\MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="forms\MainWindow.Designer.cs">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\Form2.cs">
+    <Compile Include="forms\EnhancementDetailsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <Compile Include="forms\EnhancementDetailsWindow.Designer.cs">
+      <DependentUpon>EnhancementDetailsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\Form3.cs">
+    <Compile Include="forms\TemeratureWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="forms\TemeratureWindow.Designer.cs">
+      <DependentUpon>TemeratureWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\Form4.cs">
+    <Compile Include="forms\HueSaturationLightnessWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form4.Designer.cs">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <Compile Include="forms\HueSaturationLightnessWindow.Designer.cs">
+      <DependentUpon>HueSaturationLightnessWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\Form5.cs">
+    <Compile Include="forms\ExposureFusionWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form5.Designer.cs">
-      <DependentUpon>Form5.cs</DependentUpon>
+    <Compile Include="forms\ExposureFusionWindow.Designer.cs">
+      <DependentUpon>ExposureFusionWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="forms\MainWindow.resx">
+      <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="forms\EnhancementDetailsWindow.resx">
+      <DependentUpon>EnhancementDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="forms\TemeratureWindow.resx">
+      <DependentUpon>TemeratureWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\Form4.resx">
-      <DependentUpon>Form4.cs</DependentUpon>
+    <EmbeddedResource Include="forms\HueSaturationLightnessWindow.resx">
+      <DependentUpon>HueSaturationLightnessWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\Form5.resx">
-      <DependentUpon>Form5.cs</DependentUpon>
+    <EmbeddedResource Include="forms\ExposureFusionWindow.resx">
+      <DependentUpon>ExposureFusionWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

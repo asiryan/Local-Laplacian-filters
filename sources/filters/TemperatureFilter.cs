@@ -9,7 +9,7 @@ namespace LaplacianHDR.Filters
     public class TemperatureFilter
     {
         #region Private data
-        TemperatureCorrection temp;
+        private readonly TemperatureCorrection temp;
         #endregion
 
         #region Filter components

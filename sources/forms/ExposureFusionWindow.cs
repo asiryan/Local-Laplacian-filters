@@ -10,12 +10,13 @@ namespace LaplacianHDR
     {
         #region Private data
 
-        ExposureFusion fusion;
-        Bitmap[] images;
+        private readonly ExposureFusion fusion = new ExposureFusion(int.MaxValue);
+        private Bitmap[] images;
 
         #endregion
 
         #region Form voids
+
         public ExposureFusionWindow()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace LaplacianHDR
 
         public Bitmap Apply(params Bitmap[] images)
         {
-            this.fusion = new ExposureFusion(int.MaxValue, float.Parse(textBox2.Text));
+            this.fusion.Sigma = float.Parse(textBox2.Text);
             return this.fusion.Apply(images);
         }
 
@@ -46,6 +47,8 @@ namespace LaplacianHDR
             set
             {
                 int length = value.Length;
+                
+                images?.Dispose();
                 images = new Bitmap[length];
 
                 for (int i = 0; i < length; i++)
@@ -63,6 +66,7 @@ namespace LaplacianHDR
         {
             this.DialogResult = DialogResult.OK;
         }
+
         #endregion
 
         #region TrackBars

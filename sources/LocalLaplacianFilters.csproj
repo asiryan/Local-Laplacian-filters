@@ -67,8 +67,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    <Reference Include="System.Drawing.Common, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Drawing.Common.8.0.0\lib\net462\System.Drawing.Common.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -78,8 +78,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="UMapx, Version=5.1.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\UMapx.5.1.0.2\lib\netstandard2.0\UMapx.dll</HintPath>
+    <Reference Include="UMapx, Version=5.2.9.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\UMapx.5.2.9.6\lib\netstandard2.0\UMapx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -106,11 +106,11 @@
     <Compile Include="forms\EnhancementDetailsWindow.Designer.cs">
       <DependentUpon>EnhancementDetailsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\Form3.cs">
+    <Compile Include="forms\TemeratureWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form3.Designer.cs">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <Compile Include="forms\TemeratureWindow.Designer.cs">
+      <DependentUpon>TemeratureWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="forms\Form4.cs">
       <SubType>Form</SubType>
@@ -132,8 +132,8 @@
     <EmbeddedResource Include="forms\EnhancementDetailsWindow.resx">
       <DependentUpon>EnhancementDetailsWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\Form3.resx">
-      <DependentUpon>Form3.cs</DependentUpon>
+    <EmbeddedResource Include="forms\TemeratureWindow.resx">
+      <DependentUpon>TemeratureWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="forms\Form4.resx">
       <DependentUpon>Form4.cs</DependentUpon>

@@ -36,7 +36,7 @@ namespace LaplacianHDR
         #region Private data
 
         private readonly EnhancementDetailsWindow form2 = new EnhancementDetailsWindow();
-        private readonly Form3 form3 = new Form3();
+        private readonly TemeratureWindow form3 = new TemeratureWindow();
         private readonly Form4 form4 = new Form4();
         private readonly Form5 form5 = new Form5();
         private readonly OpenFileDialog openFile = new OpenFileDialog();

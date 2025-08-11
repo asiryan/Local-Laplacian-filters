@@ -8,18 +8,18 @@ using UMapx.Imaging;
 
 namespace LaplacianHDR
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
         #region Constants
 
-        const string application = "Local Laplacian filters";
-        const string formats =
+        private const string application = "Local Laplacian filters";
+        private const string formats =
         "BMP|*.bmp|" +
         "JPEG|*.jpg; *.jpeg|" +
         "PNG|*.png|" +
         "GIF|*.gif|" +
         "TIFF|*.tiff";
-        const string originals = " Invented by " +
+        private const string originals = " Invented by " +
                 "\n Tom Mertens, Jan Kautz, Frank Van Reeth," +
                 "\n Sylvain Paris, Samuel W. Hasinoff, Mathieu Aubry" +
                 "\n 2007-2014 \n" +
@@ -35,23 +35,23 @@ namespace LaplacianHDR
 
         #region Private data
 
-        Form2 form2 = new Form2();
-        Form3 form3 = new Form3();
-        Form4 form4 = new Form4();
-        Form5 form5 = new Form5();
-        OpenFileDialog openFile = new OpenFileDialog();
-        SaveFileDialog saveFile = new SaveFileDialog();
-        Stack<Bitmap> undo = new Stack<Bitmap>();
-        Stack<Bitmap> redo = new Stack<Bitmap>();
-        string[] file;
-        int[] hist;
-        bool mouse;
+        private readonly Form2 form2 = new Form2();
+        private readonly Form3 form3 = new Form3();
+        private readonly Form4 form4 = new Form4();
+        private readonly Form5 form5 = new Form5();
+        private readonly OpenFileDialog openFile = new OpenFileDialog();
+        private readonly SaveFileDialog saveFile = new SaveFileDialog();
+        private readonly Stack<Bitmap> undo = new Stack<Bitmap>();
+        private readonly Stack<Bitmap> redo = new Stack<Bitmap>();
+        private string[] file;
+        private int[] hist;
+        private bool mouse;
 
         #endregion
 
         #region Form voids
 
-        public Form1()
+        public MainWindow()
         {
             InitializeComponent();
 
@@ -544,7 +544,7 @@ namespace LaplacianHDR
 
         #region Adjustments
 
-        SaturationContrastBrightnessFilter scf = new SaturationContrastBrightnessFilter();
+        private readonly SaturationContrastBrightnessFilter scf = new SaturationContrastBrightnessFilter();
 
         public Bitmap Image { get; set; }
 
@@ -568,7 +568,7 @@ namespace LaplacianHDR
             return filter;
         }
 
-        void trackBar1_MouseUp(object sender, MouseEventArgs e)
+        private void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -578,7 +578,7 @@ namespace LaplacianHDR
             pictureBox1.Image = Apply(Image);
         }
 
-        void trackBar2_MouseUp(object sender, MouseEventArgs e)
+        private void trackBar2_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -588,7 +588,7 @@ namespace LaplacianHDR
             pictureBox1.Image = Apply(Image);
         }
 
-        void trackBar3_MouseUp(object sender, MouseEventArgs e)
+        private void trackBar3_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -598,7 +598,7 @@ namespace LaplacianHDR
             pictureBox1.Image = Apply(Image);
         }
 
-        void trackBar4_MouseUp(object sender, MouseEventArgs e)
+        private void trackBar4_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -608,7 +608,7 @@ namespace LaplacianHDR
             pictureBox1.Image = Apply(Image);
         }
 
-        void trackBar5_MouseUp(object sender, MouseEventArgs e)
+        private void trackBar5_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -652,10 +652,12 @@ namespace LaplacianHDR
         {
             ResetAdjustments();
         }
+
         #endregion
 
         #region Edit
-        FlipFilter flip = new FlipFilter();
+
+        private readonly FlipFilter flip = new FlipFilter();
 
         private void undoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -709,6 +711,7 @@ namespace LaplacianHDR
         private void DisposeForms()
         {
             openFile.Dispose();
+
             saveFile.Dispose();
 
             form2.Close();

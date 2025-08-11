@@ -16,6 +16,7 @@ namespace LaplacianHDR
         #endregion
 
         #region Form voids
+
         public HueSaturationLightnessWindow()
         {
             InitializeComponent();

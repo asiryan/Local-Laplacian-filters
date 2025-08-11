@@ -67,6 +67,7 @@ namespace LaplacianHDR
         {
             this.DialogResult = DialogResult.OK;
         }
+
         #endregion
 
         #region TrackBars

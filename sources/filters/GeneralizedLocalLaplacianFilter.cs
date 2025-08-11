@@ -10,9 +10,9 @@ namespace LaplacianHDR.Filters
     public class GeneralizedLocalLaplacianFilter
     {
         #region Private data
-        private BilateralGammaCorrection bgc;
-        private LocalLaplacianFilter llf;
-        private BitmapFilter filter;
+        private readonly BilateralGammaCorrection bgc;
+        private readonly LocalLaplacianFilter llf;
+        private readonly BitmapFilter filter;
         #endregion
 
         #region Filter components

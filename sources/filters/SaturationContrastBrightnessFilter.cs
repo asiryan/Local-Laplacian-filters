@@ -9,11 +9,11 @@ namespace LaplacianHDR.Filters
     public class SaturationContrastBrightnessFilter
     {
         #region Private data
-        private SaturationCorrection sc;
-        private ContrastEnhancement ce;
-        private BrightnessCorrection bc;
-        private ShiftCorrection ec;
-        private GammaCorrection gc;
+        private readonly SaturationCorrection sc;
+        private readonly ContrastEnhancement ce;
+        private readonly BrightnessCorrection bc;
+        private readonly ShiftCorrection ec;
+        private readonly GammaCorrection gc;
         #endregion
 
         #region Filter components

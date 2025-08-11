@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -12,6 +13,17 @@ namespace LaplacianHDR.Helpers
     public static class ImageHelper
     {
         #region Static voids
+        /// <summary>
+        /// Disposes a stack of images.
+        /// </summary>
+        /// <param name="stack">Stack</param>
+        public static void DisposeStack(this Stack<Bitmap> stack)
+        {
+            foreach (var bitmap in stack)
+            {
+                bitmap.Dispose();
+            }
+        }
         /// <summary>
         /// Creates a bitmap from the file.
         /// </summary>

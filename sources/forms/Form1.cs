@@ -11,6 +11,7 @@ namespace LaplacianHDR
     public partial class Form1 : Form
     {
         #region Constants
+
         const string application = "Local Laplacian filters";
         const string formats =
         "BMP|*.bmp|" +
@@ -29,9 +30,11 @@ namespace LaplacianHDR
                 "\n Powered by UMapx.NET" +
                 "\n Valery Asiryan" +
                 "\n 2015-2020";
+
         #endregion
 
         #region Private data
+
         Form2 form2 = new Form2();
         Form3 form3 = new Form3();
         Form4 form4 = new Form4();
@@ -43,9 +46,11 @@ namespace LaplacianHDR
         string[] file;
         int[] hist;
         bool mouse;
+
         #endregion
 
         #region Form voids
+
         public Form1()
         {
             InitializeComponent();
@@ -102,7 +107,6 @@ namespace LaplacianHDR
             trackBar3.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
             trackBar4.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
             trackBar5.KeyDown += (sender, e) => ((KeyEventArgs)e).Handled = true;
-            return;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -131,7 +135,6 @@ namespace LaplacianHDR
             comboBox2.Items.Add(RGBA.Green);
             comboBox2.Items.Add(RGBA.Blue);
             comboBox2.SelectedIndex = 0;
-            return;
         }
 
         void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -142,48 +145,40 @@ namespace LaplacianHDR
                 // Stops other controls on the form receiving event.
                 e.SuppressKeyPress = true;
                 openToolStripMenuItem_Click(sender, e);
-                return;
             }
             else if (e.Control && e.KeyCode == Keys.S && saveToolStripMenuItem.Enabled)
             {
                 e.SuppressKeyPress = true;
                 saveToolStripMenuItem_Click(sender, e);
-                return;
             }
             else if (e.Control && e.KeyCode == Keys.X && closeToolStripMenuItem.Enabled)
             {
                 e.SuppressKeyPress = true;
                 closeToolStripMenuItem_Click(sender, e);
-                return;
             }
             else if (e.Control && e.KeyCode == Keys.R && reloadToolStripMenuItem.Enabled)
             {
                 e.SuppressKeyPress = true;
                 reloadToolStripMenuItem_Click(sender, e);
-                return;
             }
             else if (e.Control && e.KeyCode == Keys.Z && undoToolStripMenuItem.Enabled)
             {
                 e.SuppressKeyPress = true;
                 undoToolStripMenuItem_Click(sender, e);
-                return;
             }
             else if (e.Control && e.KeyCode == Keys.Y && redoToolStripMenuItem.Enabled)
             {
                 e.SuppressKeyPress = true;
                 redoToolStripMenuItem_Click(sender, e);
-                return;
             }
-            return;
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (openFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (openFile.ShowDialog() == DialogResult.OK)
             {
                 TryOpen(openFile.FileNames);
             }
-            return;
         }
 
         private void exposureFusionToolStripMenuItem_Click(object sender, EventArgs e)
@@ -210,7 +205,7 @@ namespace LaplacianHDR
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveFile.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (saveFile.ShowDialog() == DialogResult.OK)
             {
                 TrySave(saveFile.FileName, saveFile.FilterIndex);
             }
@@ -238,7 +233,7 @@ namespace LaplacianHDR
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            Dispose();
         }
 
         private void enhancementToolStripMenuItem_Click(object sender, EventArgs e)
@@ -246,46 +241,44 @@ namespace LaplacianHDR
             form2.Image = Image;
             form2.Space = Space;
 
-            if (form2.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (form2.ShowDialog() == DialogResult.OK)
             {
                 Processor(Image, form2.Apply);
             }
-            return;
         }
 
         private void temperatureToolStripMenuItem_Click(object sender, EventArgs e)
         {
             form3.Image = Image;
 
-            if (form3.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (form3.ShowDialog() == DialogResult.OK)
             {
                 Processor(Image, form3.Apply);
             }
-            return;
         }
 
         private void hslToolStripMenuItem_Click(object sender, EventArgs e)
         {
             form4.Image = Image;
 
-            if (form4.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (form4.ShowDialog() == DialogResult.OK)
             {
                 Processor(Image, form4.Apply);
             }
-            return;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             Space = ImageHelper.GetSpace(comboBox1.SelectedIndex);
         }
+
         #endregion
 
         #region Histogram
+
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             GetHistogram(Image, false);
-            return;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -294,7 +287,6 @@ namespace LaplacianHDR
                 histogram2.IsLogarithmicView =
                 histogram3.IsLogarithmicView =
                 histogram4.IsLogarithmicView = checkBox1.Checked;
-            return;
         }
 
         private void histogram1_MouseUp(object sender, MouseEventArgs e)
@@ -302,10 +294,12 @@ namespace LaplacianHDR
             mouse = false;
             label8.Text = null;
         }
+
         private void histogram1_MouseDown(object sender, MouseEventArgs e)
         {
             mouse = true;
         }
+
         private void histogram1_SelectionChanged(object sender, Controls.HistogramEventArgs e)
         {
             if (mouse)
@@ -327,9 +321,11 @@ namespace LaplacianHDR
                     ((float)count * 100 / Statistics.Sum(hist)).ToString("F2");
             }
         }
+
         #endregion
 
         #region Private voids
+
         private void TryOpen(params string[] filenames)
         {
             // length
@@ -341,13 +337,14 @@ namespace LaplacianHDR
                 if (length == 0)
                 {
                     // dispose and clear
-                    DisposeControls();
+                    ClearControls();
                     ActivateControls(false);
                 }
                 else if (length == 1)
                 {
                     // single image
-                    Processor(ImageHelper.Open(filenames[0]), null, false);
+                    var bitmap = ImageHelper.Open(filenames[0]);
+                    Processor(bitmap, null, false);
                     file = new string[] { filenames[0] };
                     Text = application + ": " + System.IO.Path.GetFileName(file[0]);
                     ActivateControls(true);
@@ -369,14 +366,13 @@ namespace LaplacianHDR
                 }
 
                 // clear data
-                ClearStacks();
+                DisposeStacks();
             }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message, application + ": Error", MessageBoxButtons.OK,
                             MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
-            return;
         }
 
         private void TrySave(string filename, int index)
@@ -393,7 +389,23 @@ namespace LaplacianHDR
                 MessageBox.Show(exception.Message, application + ": Error", MessageBoxButtons.OK,
                             MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
             }
-            return;
+        }
+
+        private void ResetAdjustments()
+        {
+            trackBar1.Value =
+                trackBar2.Value =
+                trackBar3.Value =
+                trackBar4.Value =
+                trackBar5.Value = 0;
+
+            textBox1.Text =
+                textBox2.Text =
+                textBox3.Text =
+                textBox4.Text =
+                textBox5.Text = "0";
+
+            pictureBox1.Image = Image;
         }
 
         private void ActivateControls(bool enabled)
@@ -422,8 +434,20 @@ namespace LaplacianHDR
             // stacks
             undoToolStripMenuItem.Enabled =
                 redoToolStripMenuItem.Enabled = false;
+        }
 
-            return;
+        private void ClearControls()
+        {
+            file = null;
+            Image = null;
+            Text = application;
+            label4.Text = null;
+            label8.Text = null;
+            pictureBox1.Image = null;
+            histogram1.Values = null;
+            histogram2.Values = null;
+            histogram3.Values = null;
+            histogram4.Values = null;
         }
 
         private void GetHistogram(Bitmap image, bool update = true)
@@ -475,48 +499,6 @@ namespace LaplacianHDR
                     median + "\n" +
                     pixels;
             }
-
-            return;
-        }
-
-        private void DisposeControls()
-        {
-            file = null;
-            Image = null;
-            Text = application;
-            label4.Text = null;
-            label8.Text = null;
-            pictureBox1.Image = null;
-            histogram1.Values = null;
-            histogram2.Values = null;
-            histogram3.Values = null;
-            histogram4.Values = null;
-            return;
-        }
-
-        private void ClearStacks()
-        {
-            undo.Clear();
-            redo.Clear();
-            return;
-        }
-
-        private void ResetAdjustments()
-        {
-            trackBar1.Value =
-                trackBar2.Value =
-                trackBar3.Value =
-                trackBar4.Value =
-                trackBar5.Value = 0;
-
-            textBox1.Text =
-                textBox2.Text =
-                textBox3.Text =
-                textBox4.Text =
-                textBox5.Text = "0";
-
-            pictureBox1.Image = Image;
-            return;
         }
 
         private void Processor(Bitmap bitmap, Filter filter, bool cache = true)
@@ -542,7 +524,6 @@ namespace LaplacianHDR
                 pictureBox1.Image = Image;
                 Cursor = Cursors.Arrow;
             }
-            return;
         }
 
         private void Processor(Bitmap[] bitmap, MultiFilter filter)
@@ -551,20 +532,24 @@ namespace LaplacianHDR
             if (bitmap != null)
             {
                 Cursor = Cursors.WaitCursor;
-                Image = (filter != null) ? filter(bitmap) : null; // not implemented
+                Image = (filter != null) ? filter(bitmap) : null;
                 GetHistogram(Image);
                 ResetAdjustments();
                 pictureBox1.Image = Image;
                 Cursor = Cursors.Arrow;
             }
-            return;
         }
+
         #endregion
 
         #region Adjustments
+
         SaturationContrastBrightnessFilter scf = new SaturationContrastBrightnessFilter();
+
         public Bitmap Image { get; set; }
+
         public Space Space { get; set; }
+
         public Bitmap Apply(Bitmap image)
         {
             // parsing
@@ -585,43 +570,47 @@ namespace LaplacianHDR
 
         void trackBar1_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 trackBar1.Value = 0;
                 trackBar1_Scroll(sender, e);
             }
             pictureBox1.Image = Apply(Image);
         }
+
         void trackBar2_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 trackBar2.Value = 0;
                 trackBar2_Scroll(sender, e);
             }
             pictureBox1.Image = Apply(Image);
         }
+
         void trackBar3_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 trackBar3.Value = 0;
                 trackBar3_Scroll(sender, e);
             }
             pictureBox1.Image = Apply(Image);
         }
+
         void trackBar4_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 trackBar4.Value = 0;
                 trackBar4_Scroll(sender, e);
             }
             pictureBox1.Image = Apply(Image);
         }
+
         void trackBar5_MouseUp(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            if (e.Button == MouseButtons.Right)
             {
                 trackBar5.Value = 0;
                 trackBar5_Scroll(sender, e);
@@ -633,18 +622,22 @@ namespace LaplacianHDR
         {
             textBox1.Text = trackBar1.Value.ToString();
         }
+
         private void trackBar2_Scroll(object sender, EventArgs e)
         {
             textBox2.Text = trackBar2.Value.ToString();
         }
+
         private void trackBar3_Scroll(object sender, EventArgs e)
         {
             textBox3.Text = trackBar3.Value.ToString();
         }
+
         private void trackBar4_Scroll(object sender, EventArgs e)
         {
             textBox4.Text = trackBar4.Value.ToString();
         }
+
         private void trackBar5_Scroll(object sender, EventArgs e)
         {
             textBox5.Text = trackBar5.Value.ToString();
@@ -653,12 +646,11 @@ namespace LaplacianHDR
         private void button1_Click(object sender, EventArgs e)
         {
             Processor((Bitmap)pictureBox1.Image, null);
-            return;
         }
+
         private void button2_Click(object sender, EventArgs e)
         {
             ResetAdjustments();
-            return;
         }
         #endregion
 
@@ -676,7 +668,6 @@ namespace LaplacianHDR
                 GetHistogram(Image);
                 pictureBox1.Image = Image;
             }
-            return;
         }
         private void redoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -689,7 +680,6 @@ namespace LaplacianHDR
                 GetHistogram(Image);
                 pictureBox1.Image = Image;
             }
-            return;
         }
 
         private void flipVerticalToolStripMenuItem_Click(object sender, EventArgs e)
@@ -697,11 +687,60 @@ namespace LaplacianHDR
             flip.SetParams(false, true);
             Processor(Image, flip.Apply);
         }
+
         private void flipHorizontalToolStripMenuItem_Click(object sender, EventArgs e)
         {
             flip.SetParams(true, false);
             Processor(Image, flip.Apply);
         }
+
+        #endregion
+
+        #region Dispose
+
+        public new void Dispose()
+        {
+            DisposeHistograms();
+            DisposeForms();
+            DisposeStacks();
+            base.Dispose();
+        }
+
+        private void DisposeForms()
+        {
+            openFile.Dispose();
+            saveFile.Dispose();
+
+            form2.Close();
+            form2.Dispose();
+
+            form3.Close();
+            form3.Dispose();
+
+            form4.Close();
+            form4.Dispose();
+
+            form5.Close();
+            form5.Dispose();
+        }
+
+        private void DisposeHistograms()
+        {
+            histogram1.Dispose();
+            histogram2.Dispose();
+            histogram3.Dispose();
+            histogram4.Dispose();
+        }
+
+        private void DisposeStacks()
+        {
+            undo.DisposeStack();
+            undo.Clear();
+
+            redo.DisposeStack();
+            redo.Clear();
+        }
+
         #endregion
     }
 }

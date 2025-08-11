@@ -9,7 +9,7 @@ namespace LaplacianHDR.Filters
     public class FlipFilter
     {
         #region Private data
-        private Flip flip;
+        private readonly Flip flip;
         #endregion
 
         #region Filter components

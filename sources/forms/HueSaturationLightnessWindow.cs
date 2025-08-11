@@ -58,8 +58,8 @@ namespace LaplacianHDR
         {
             set
             {
+                image?.Dispose();
                 image = ImageHelper.Crop(value, pictureBox1.Width);
-                pictureBox1.Image = image;
             }
             get
             {
